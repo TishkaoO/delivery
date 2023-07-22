@@ -19,4 +19,8 @@
     <changeSet author="Vktoriia" id="220720231229">
         <sqlFile path="scripts/008_ddl_alter_tables_order_dish_and_card.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet author="Vktoriia" id="220720231311">
+        <sqlFile path="scripts/009_dml_insert_status.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/010_dml_insert_dish.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
