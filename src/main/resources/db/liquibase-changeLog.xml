@@ -16,4 +16,7 @@
     <changeSet author="Vktoriia" id="220720231200">
         <sqlFile path="scripts/007_ddl_create_statistic_table.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet author="Vktoriia" id="220720231229">
+        <sqlFile path="scripts/008_ddl_alter_tables_order_dish_and_card.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
