@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -30,6 +32,9 @@ public class DishEntity {
 
     @Column(name = "is_stock", nullable = false)
     private boolean isStock;
+
+    @OneToMany(mappedBy = "dishEntity")
+    List<StatisticEntity> statisticEntityList = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
