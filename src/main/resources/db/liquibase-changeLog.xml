@@ -13,4 +13,7 @@
     <sqlFile path="scripts/005_ddl_create_order_dish_table.sql" relativeToChangelogFile="true"/>
     <sqlFile path="scripts/006_ddl_create_card_table.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet author="Vktoriia" id="220720231200">
+        <sqlFile path="scripts/007_ddl_create_statistic_table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
