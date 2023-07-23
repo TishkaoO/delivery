@@ -5,4 +5,5 @@ import ru.fkjob.delivery.store.dao.OrderDao;
 
 @Repository
 public class CustomerDaoJDBCImpl implements OrderDao {
+    //TODO:написать логику для этого класса
 }
