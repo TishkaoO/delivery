@@ -11,7 +11,7 @@ import java.util.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "customer")
+@Table(name = "customer" , schema = "delivery")
 public class CustomerEntity {
 
     @Id
@@ -19,11 +19,16 @@ public class CustomerEntity {
     @Column(name = "customer_id")
     private Long id;
 
+
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(unique = true, nullable = false)
+    private String email;
+
     @Column(nullable = false)
     private String password;
+
 
     @OneToMany(mappedBy = "customerEntity")
     private List<OrderEntity> orderEntityList = new ArrayList<>();

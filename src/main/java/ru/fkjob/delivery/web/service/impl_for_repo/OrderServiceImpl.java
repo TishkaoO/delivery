@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderEntity> orderEntities = customer.getOrderEntityList();
         orderEntities.add(saveOrder);
         customer.setOrderEntityList(orderEntities);
-        customerService.save(customer);
+//        customerService.save(customer);
         return orderDto;
     }
 }
