@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.store.entity.CustomerEntity;
 import ru.fkjob.delivery.store.repository.CustomerRepository;
 import ru.fkjob.delivery.web.dto.CustomerDTO;
+import ru.fkjob.delivery.web.dto.mapper.DishMapper;
 import ru.fkjob.delivery.web.service.CustomerService;
 import ru.fkjob.delivery.web.service.mail.CustomerEventPublisher;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
