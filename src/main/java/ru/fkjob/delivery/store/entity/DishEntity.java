@@ -1,8 +1,8 @@
 package ru.fkjob.delivery.store.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "dish")
+@Table(name = "dish", schema = "delivery")
 public class DishEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

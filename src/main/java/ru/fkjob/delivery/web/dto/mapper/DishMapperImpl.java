@@ -6,6 +6,7 @@ import ru.fkjob.delivery.web.dto.DishDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DishMapperImpl implements DishMapper {
@@ -21,12 +22,9 @@ public class DishMapperImpl implements DishMapper {
 
     @Override
     public List<DishDTO> toDto(List<DishEntity> entity) {
-        List<DishDTO> dtos = new ArrayList<>();
-        for (DishEntity tmp : entity) {
-            DishDTO dto = new DishDTO(tmp.getId(), tmp.getName(), tmp.getPrice());
-            dtos.add(dto);
-        }
-        return dtos;
+        return entity.stream()
+                .map(dishEntity -> toDto(dishEntity))
+                .collect(Collectors.toList());
     }
 
     @Override
