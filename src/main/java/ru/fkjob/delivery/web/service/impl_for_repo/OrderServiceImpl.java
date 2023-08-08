@@ -40,10 +40,10 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderDTO create(long userId, List<Long> dishIds) {
         List<DishEntity> dishEntities = new ArrayList<>();
-        for (Long id : dishIds) {
-            DishEntity dishEntityById = dishService.getDishEntityById(id);
-            dishEntities.add(dishEntityById);
-        }
+//        for (Long id : dishIds) {
+//            DishEntity dishEntityById = dishService.getDishEntityById(id);
+//            dishEntities.add(dishEntityById);
+//        }
         BigDecimal totalAmount = orderBillingService.calculateTotalAmount(dishEntities);
         OrderEntity builder = OrderEntity.builder()
                 .numberOfOrder(generateOrderNumber())
@@ -63,10 +63,10 @@ public class OrderServiceImpl implements OrderService {
                 .toPay(totalAmount)
                 .build();
         //TODO: нужно сделать мапер чтобы так код не плодить
-        CustomerEntity customer = customerService.getCustomerById(userId);
-        List<OrderEntity> orderEntities = customer.getOrderEntityList();
-        orderEntities.add(saveOrder);
-        customer.setOrderEntityList(orderEntities);
+//        CustomerEntity customer = customerService.getCustomerById(userId);
+//        List<OrderEntity> orderEntities = customer.getOrderEntityList();
+//        orderEntities.add(saveOrder);
+//        customer.setOrderEntityList(orderEntities);
 //        customerService.save(customer);
         return orderDto;
     }

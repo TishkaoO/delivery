@@ -5,21 +5,23 @@ import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.store.entity.CustomerEntity;
 import ru.fkjob.delivery.store.repository.CustomerRepository;
 import ru.fkjob.delivery.web.dto.CustomerDTO;
+import ru.fkjob.delivery.web.dto.mapper.CustomerMapper;
 import ru.fkjob.delivery.web.service.CustomerService;
 import ru.fkjob.delivery.web.service.mail.CustomerEventPublisher;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerEventPublisher customerEventPublisher;
+    private final CustomerMapper customerMapper;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerEventPublisher customerEventPublisher) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerEventPublisher customerEventPublisher, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerEventPublisher = customerEventPublisher;
+        this.customerMapper = customerMapper;
     }
 
     @Override
@@ -34,41 +36,34 @@ public class CustomerServiceImpl implements CustomerService {
                 .build();
         CustomerEntity entity = customerRepository.save(customerEntity);
         customerEventPublisher.publishCustomerRegisteredEvent(entity);
-        return CustomerDTO.builder()
-                .id(entity.getId())
-                .email(customer.getEmail())
-                .username(entity.getUsername())
-                .password(entity.getPassword())
-                .build();
+        return customerMapper.toDto(entity);
     }
 
     @Override
-    public List<CustomerEntity> getAll() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> getAll() {
+        List<CustomerEntity> customerEntities = customerRepository.findAll();
+        return customerMapper.toDto(customerEntities);
     }
 
     @Override
-    public CustomerEntity getCustomerById(long id) {
-        return customerRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    public CustomerDTO getCustomerById(long id) {
+        return customerRepository.findById(id)
+                .map(customerEntity -> customerMapper.toDto(customerEntity))
+                .orElseThrow(() -> new RuntimeException());
     }
 
     @Override
-    public CustomerEntity updateCustomer(long id, CustomerDTO customerDTO) {
-        CustomerEntity entity = customerRepository.findById(id).orElseThrow(() -> new RuntimeException());
-        entity.setUsername("username1234");
-        return customerRepository.save(entity);
+    public CustomerDTO updateCustomer(long id, CustomerDTO customerDTO) {
+        CustomerEntity customer = customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException());
+        customer.setEmail(customerDTO.getEmail());
+        customer.setPassword(customerDTO.getPassword());
+        CustomerEntity entity = customerRepository.save(customer);
+        return customerMapper.toDto(entity);
     }
 
     private boolean isValidUser(CustomerDTO dto) {
-        CustomerEntity customer = CustomerEntity.builder()
-                .id(dto.getId())
-                .username(dto.getUsername())
-                .password(dto.getPassword())
-                .build();
-//        Optional<CustomerEntity> customerEntityOptional = customerRepository.findByUsername(customer.getUsername());
-//        if (!customerEntityOptional.isEmpty()) {
-//            throw new IllegalArgumentException("username is exists");
-//        }
+        CustomerEntity customer = customerMapper.toEntity(dto);
         if (dto.getUsername() == null || dto.getUsername().isEmpty()) {
             throw new IllegalArgumentException("Login cannot be empty");
         }

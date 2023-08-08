@@ -1,6 +1,6 @@
 package ru.fkjob.delivery.store.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.util.List;

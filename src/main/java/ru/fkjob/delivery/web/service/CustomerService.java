@@ -9,9 +9,9 @@ public interface CustomerService {
 
     CustomerDTO save(CustomerDTO customer);
 
-    CustomerEntity getCustomerById(long id);
+    CustomerDTO getCustomerById(long id);
 
-    CustomerEntity updateCustomer(long id, CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(long id, CustomerDTO customerDTO);
 
-    List<CustomerEntity> getAll();
+    List<CustomerDTO> getAll();
 }
