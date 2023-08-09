@@ -27,9 +27,8 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishDTO getDishEntityById(long id) {
+    public DishEntity getDishEntityById(long id) {
         return dishRepository.findById(id)
-                .map(entity -> dishMapper.toDto(entity))
                 .orElseThrow(() -> new NoSuchElementException("Not found"));
     }
 

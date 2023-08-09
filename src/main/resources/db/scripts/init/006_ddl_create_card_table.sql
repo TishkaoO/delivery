@@ -5,5 +5,5 @@ create table if not exists delivery.card(
     expiry_date timestamp not null,
     cvv varchar not null unique,
     balance numeric(10,2),
-    fk_card_id int references delivery.customer(customer_id)
+    fk_customer_id int references delivery.customer(customer_id)
 );

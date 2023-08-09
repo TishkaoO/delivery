@@ -2,11 +2,13 @@ package ru.fkjob.delivery.web.service.impl_for_repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.fkjob.delivery.store.entity.CustomerEntity;
 import ru.fkjob.delivery.store.entity.DishEntity;
 import ru.fkjob.delivery.store.entity.OrderEntity;
 import ru.fkjob.delivery.store.entity.StatusOrderEntity;
 import ru.fkjob.delivery.store.repository.OrderRepository;
+import ru.fkjob.delivery.store.repository.StatusRepository;
 import ru.fkjob.delivery.web.dto.CustomerDTO;
 import ru.fkjob.delivery.web.dto.DishDTO;
 import ru.fkjob.delivery.web.dto.OrderDTO;
@@ -17,11 +19,13 @@ import ru.fkjob.delivery.web.service.CustomerService;
 import ru.fkjob.delivery.web.service.DishService;
 import ru.fkjob.delivery.web.service.OrderBillingService;
 import ru.fkjob.delivery.web.service.OrderService;
+import ru.fkjob.delivery.web.utils.OrderNumberGenerator;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.fkjob.delivery.web.utils.OrderNumberGenerator.generateOrderNumber;
 
@@ -35,10 +39,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final CustomerMapper customerMapper;
 
+    private final StatusRepository statusRepository;
+
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, DishService dishService, 
                             CustomerService customerService, OrderBillingService orderBillingService, 
-                            DishMapper dishMapper, OrderMapper orderMapper, CustomerMapper customerMapper) {
+                            DishMapper dishMapper, OrderMapper orderMapper, CustomerMapper customerMapper,
+                            StatusRepository statusRepository) {
         this.orderRepository = orderRepository;
         this.dishService = dishService;
         this.customerService = customerService;
@@ -46,31 +53,30 @@ public class OrderServiceImpl implements OrderService {
         this.dishMapper = dishMapper;
         this.orderMapper = orderMapper;
         this.customerMapper = customerMapper;
+        this.statusRepository = statusRepository;
     }
 
+    @Transactional
     public OrderDTO create(long userId, List<Long> dishIds) {
-        List<DishEntity> dishEntities = new ArrayList<>();
-        for (Long id : dishIds) {
-            DishDTO dishDTO = dishService.getDishEntityById(id);
-            DishEntity entity = dishMapper.toEntity(dishDTO);
-            dishEntities.add(entity);
-        }
-        StatusOrderEntity statusEntity = new StatusOrderEntity();
-        statusEntity.setName("waiting for payment");
+        List<DishEntity> dishEntities = dishIds.stream()
+                .map(id -> dishService.getDishEntityById(id))
+                .collect(Collectors.toList());
+        BigDecimal totalAmount = orderBillingService.calculateTotalAmount(dishEntities);
+        StatusOrderEntity status = statusRepository.findByName("ожидает оплаты").get();
         OrderEntity builder = OrderEntity.builder()
                 .numberOfOrder(generateOrderNumber())
                 .dishEntities(dishEntities)
                 .created(Instant.now())
-                .statusOrderEntity(statusEntity)
+                .statusOrderEntity(status)
+                .price(totalAmount)
                 .build();
+        orderRepository.save(builder);
         OrderEntity saveOrder = orderRepository.save(builder);
-        OrderDTO orderDto = orderMapper.toDto(saveOrder);
         CustomerDTO customerDTO = customerService.getCustomerById(userId);
-        CustomerEntity entity = customerMapper.toEntity(customerDTO);
-        List<OrderEntity> orderEntities = entity.getOrderEntityList();
-        orderEntities.add(saveOrder);
-        entity.setOrderEntityList(orderEntities);
-        customerService.save(entity);
+        CustomerEntity customerEntity = customerMapper.toEntity(customerDTO);
+        customerEntity.setOrderEntityList(List.of(builder));
+        customerService.save(customerEntity);
+        OrderDTO orderDto = orderMapper.toDto(saveOrder);
         return orderDto;
     }
 }

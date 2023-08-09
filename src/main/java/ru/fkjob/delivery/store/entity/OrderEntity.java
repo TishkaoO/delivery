@@ -3,6 +3,7 @@ package ru.fkjob.delivery.store.entity;
 import javax.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +29,24 @@ public class OrderEntity {
     private Instant created = Instant.now();
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "fk_customer_id")
     private CustomerEntity customerEntity;
 
     @ManyToMany
     @JoinTable(
+            schema = "delivery",
             name = "order_dish",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "dish_id")
+            joinColumns = @JoinColumn(name = "fk_order_id"),
+            inverseJoinColumns = @JoinColumn(name = "fk_dish_id")
     )
     private List<DishEntity> dishEntities = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "status_order_id")
+    @JoinColumn(name = "fk_status_id")
     private StatusOrderEntity statusOrderEntity;
+
+    @Column(name = "price", nullable = false)
+    private BigDecimal price;
 
     @Override
     public boolean equals(Object o) {

@@ -36,7 +36,7 @@ public class CardEntity {
     private BigDecimal balance;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "fk_customer_id")
     private CustomerEntity customerEntity;
 
     @Override
