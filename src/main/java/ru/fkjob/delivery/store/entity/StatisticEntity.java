@@ -21,7 +21,7 @@ public class StatisticEntity {
     private int count;
 
     @ManyToOne
-    @JoinColumn(name = "dish_id")
+    @JoinColumn(name = "fk_dish_id")
     private DishEntity dishEntity;
 
 

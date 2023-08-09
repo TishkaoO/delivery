@@ -30,7 +30,6 @@ public class OrderMapperImpl implements OrderMapper {
                 .id(entity.getId())
                 .numberOfOrder(entity.getNumberOfOrder())
                 .created(entity.getCreated())
-                .nameOwner(entity.getCustomerEntity().getUsername())
                 .dishDTOS(dishDTOS)
                 .statusName(entity.getStatusOrderEntity().getName())
                 .toPay(orderBillingService.calculateTotalAmount(dishEntities))

@@ -20,8 +20,6 @@ public class OrderDTO {
 
     private Instant created = Instant.now();
 
-    private String nameOwner;
-
     private List<DishDTO> dishDTOS = new ArrayList<>();
 
     private String statusName;
