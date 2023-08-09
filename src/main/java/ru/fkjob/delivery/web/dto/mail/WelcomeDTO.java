@@ -11,6 +11,5 @@ import org.springframework.beans.factory.annotation.Value;
 @Setter
 public class WelcomeDTO {
     private String subject;
-    @Value("${message.text}")
     private String text;
 }

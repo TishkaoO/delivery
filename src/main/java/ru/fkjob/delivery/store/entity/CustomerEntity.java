@@ -13,13 +13,10 @@ import java.util.*;
 @Entity
 @Table(name = "customer" , schema = "delivery")
 public class CustomerEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     private Long id;
-
-
     @Column(unique = true, nullable = false)
     private String username;
 
@@ -28,7 +25,6 @@ public class CustomerEntity {
 
     @Column(nullable = false)
     private String password;
-
 
     @OneToMany(mappedBy = "customerEntity")
     private List<OrderEntity> orderEntityList = new ArrayList<>();
