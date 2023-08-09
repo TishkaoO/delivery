@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderDTO create(long userId, List<Long> dishIds) {
         List<DishEntity> dishEntities = dishIds.stream()
-                .map(id -> dishService.getDishEntityById(id))
+                .map(dishService::getDishEntityById)
                 .collect(Collectors.toList());
         BigDecimal totalAmount = orderBillingService.calculateTotalAmount(dishEntities);
         StatusOrderEntity status = statusRepository.findByName("ожидает оплаты").get();
@@ -70,7 +70,6 @@ public class OrderServiceImpl implements OrderService {
                 .statusOrderEntity(status)
                 .price(totalAmount)
                 .build();
-        orderRepository.save(builder);
         OrderEntity saveOrder = orderRepository.save(builder);
         CustomerDTO customerDTO = customerService.getCustomerById(userId);
         CustomerEntity customerEntity = customerMapper.toEntity(customerDTO);
