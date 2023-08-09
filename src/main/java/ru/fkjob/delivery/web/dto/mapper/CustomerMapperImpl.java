@@ -23,7 +23,7 @@ public class CustomerMapperImpl implements CustomerMapper {
     @Override
     public List<CustomerDTO> toDto(List<CustomerEntity> entity) {
         return entity.stream()
-                .map(customerEntity -> toDto(customerEntity))
+                .map(this::toDto)
                 .collect(Collectors.toList());
     }
 

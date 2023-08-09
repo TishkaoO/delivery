@@ -5,6 +5,9 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Kirill" id="090820231243">
+        <sqlFile path="scripts/011_create_schema_delivery.sql" relativeToChangelogFile="true"/>
+    </changeSet>
     <changeSet author="Kirill" id="200720131514">
     <sqlFile path="scripts/001_ddl_create_customer_table.sql" relativeToChangelogFile="true"/>
     <sqlFile path="scripts/002_ddl_create_status_order_table.sql" relativeToChangelogFile="true"/>
@@ -22,5 +25,8 @@
     <changeSet author="Vktoriia" id="220720231311">
         <sqlFile path="scripts/009_dml_insert_status.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/010_dml_insert_dish.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet author="Kirill" id="090820231301">
+        <sqlFile path="scripts/012_dml_insert_customer.sql" relativeToChangelogFile="true"/>
     </changeSet>
 </databaseChangeLog>

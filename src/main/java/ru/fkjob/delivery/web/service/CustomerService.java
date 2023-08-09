@@ -14,4 +14,6 @@ public interface CustomerService {
     CustomerDTO updateCustomer(long id, CustomerDTO customerDTO);
 
     List<CustomerDTO> getAll();
+
+    CustomerEntity save(CustomerEntity customer);
 }

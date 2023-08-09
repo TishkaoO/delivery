@@ -1,13 +1,19 @@
 package ru.fkjob.delivery.web.service.mail;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import ru.fkjob.delivery.web.dto.mail.WelcomeDTO;
 
 @Service
 public class MailMessageSenderImpl implements MessageSender {
     private final JavaMailSender javaMailSender;
+
+    @Value("${message.subject}")
+    private String subject;
+
+    @Value("${message.text}")
+    private String text;
 
     public MailMessageSenderImpl(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -16,10 +22,9 @@ public class MailMessageSenderImpl implements MessageSender {
     @Override
     public boolean sendMessage(String mail) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        WelcomeDTO dto = new WelcomeDTO();
         simpleMailMessage.setTo(mail);
-        simpleMailMessage.setSubject(dto.getSubject());
-        simpleMailMessage.setText(dto.getText());
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(text);
         javaMailSender.send(simpleMailMessage);
         return true;
     }

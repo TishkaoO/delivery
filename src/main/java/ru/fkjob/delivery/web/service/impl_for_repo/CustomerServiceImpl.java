@@ -25,18 +25,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO save(CustomerDTO customer) {
-        if (!isValidUser(customer)) {
+    public CustomerDTO save(CustomerDTO dto) {
+        if (!isValidUser(dto)) {
             throw new IllegalArgumentException("Invalid user data");
         }
-        CustomerEntity customerEntity = CustomerEntity.builder()
-                .email(customer.getEmail())
-                .username(customer.getUsername())
-                .password(customer.getPassword())
-                .build();
+        CustomerEntity customerEntity = customerMapper.toEntity(dto);
         CustomerEntity entity = customerRepository.save(customerEntity);
         customerEventPublisher.publishCustomerRegisteredEvent(entity);
         return customerMapper.toDto(entity);
+    }
+
+    @Override
+    public CustomerEntity save(CustomerEntity customer) {
+        return customerRepository.save(customer);
     }
 
     @Override
