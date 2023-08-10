@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fkjob.delivery.store.entity.CardEntity;
-import ru.fkjob.delivery.store.entity.DishEntity;
 import ru.fkjob.delivery.store.entity.OrderEntity;
 import ru.fkjob.delivery.store.entity.StatusOrderEntity;
 import ru.fkjob.delivery.store.repository.CardRepository;
@@ -12,12 +11,11 @@ import ru.fkjob.delivery.store.repository.CustomerRepository;
 import ru.fkjob.delivery.store.repository.OrderRepository;
 import ru.fkjob.delivery.store.repository.StatusRepository;
 import ru.fkjob.delivery.web.dto.mapper.OrderMapper;
-import ru.fkjob.delivery.web.service.OrderService;
+import ru.fkjob.delivery.web.exception.PaymentException;
 import ru.fkjob.delivery.web.service.PaymentService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -50,7 +48,7 @@ public class PaymentServiceDebitCardImpl implements PaymentService {
         BigDecimal debit;
         LocalDateTime currentDateTime = LocalDateTime.now();
         if (card.getExpiryDate().isBefore(currentDateTime)) {
-            throw new IllegalArgumentException("The card has expired.");
+            throw new PaymentException("The card has expired.");
         }
         BigDecimal price = order.getPrice();
         BigDecimal balance = card.getBalance();
