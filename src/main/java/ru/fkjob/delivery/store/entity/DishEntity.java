@@ -34,7 +34,11 @@ public class DishEntity {
     private boolean isStock;
 
     @OneToMany(mappedBy = "dishEntity")
-    List<StatisticEntity> statisticEntityList = new ArrayList<>();
+    private List<StatisticEntity> statisticEntityList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "fk_category_id")
+    private CategoryEntity categoryEntity;
 
     @Override
     public boolean equals(Object o) {

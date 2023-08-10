@@ -10,15 +10,14 @@
         <sqlFile path="scripts/init/002_ddl_create_customer_table.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/init/003_ddl_create_status_order_table.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/init/004_ddl_create_orders_table.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/init/005_ddl_create_dish_table.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/init/005_ddl_create_category_table.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/init/006_ddl_create_card_table.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/init/007_ddl_create_order_dish_table.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/init/008_ddl_create_statistic_table.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/009_dml_insert_status.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/010_dml_insert_dish.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/011_dml_insert_for_test_customer.sql" relativeToChangelogFile="true"/>
-    </changeSet>
-    <changeSet author="Kirill" id="1008202309235">
-        <sqlFile path="scripts/012_dml_insert_for_test_card.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/init/007_ddl_create_dish_table.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/init/008_ddl_create_order_dish_table.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/init/009_ddl_create_statistic_table.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/010_dml_insert_status.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/011_dml_insert_dish.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/012_dml_insert_for_test_customer.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/013_dml_insert_for_test_card.sql" relativeToChangelogFile="true"/>
     </changeSet>
 </databaseChangeLog>

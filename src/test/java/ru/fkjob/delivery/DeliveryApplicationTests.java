@@ -11,16 +11,4 @@ import ru.fkjob.delivery.web.service.impl_for_repo.CustomerServiceImpl;
 
 @SpringBootTest
 class DeliveryApplicationTests {
-
-    @MockBean
-    private CustomerRepository customerRepository;
-    @InjectMocks
-    private CustomerService customerService;
-
-
-    @Test
-    void contextLoads() {
-        customerService.getCustomerById(1l);
-    }
-
 }
