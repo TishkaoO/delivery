@@ -42,11 +42,11 @@ public class PaymentServiceDebitCardImpl implements PaymentService {
     @Transactional
     public boolean toPay(long orderId, long cardId) {
         OrderEntity order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new NoSuchElementException("not found"));
+                .orElseThrow(() -> new NoSuchElementException("order not found"));
         CardEntity card = cardRepository.findById(cardId)
-                .orElseThrow(() -> new NoSuchElementException("not found"));
+                .orElseThrow(() -> new NoSuchElementException("card not found"));
         StatusOrderEntity statusOrder = statusRepository.findByName("заказ готовится")
-                .orElseThrow(() -> new NoSuchElementException("not found"));
+                .orElseThrow(() -> new NoSuchElementException("status not found"));
         BigDecimal debit;
         LocalDateTime currentDateTime = LocalDateTime.now();
         if (card.getExpiryDate().isBefore(currentDateTime)) {

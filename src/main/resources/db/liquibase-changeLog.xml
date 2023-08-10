@@ -18,4 +18,7 @@
         <sqlFile path="scripts/010_dml_insert_dish.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/011_dml_insert_for_test_customer.sql" relativeToChangelogFile="true"/>
     </changeSet>
+    <changeSet author="Kirill" id="1008202309235">
+        <sqlFile path="scripts/012_dml_insert_for_test_card.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
