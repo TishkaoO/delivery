@@ -24,7 +24,6 @@ public class StatisticEntity {
     @JoinColumn(name = "fk_dish_id")
     private DishEntity dishEntity;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

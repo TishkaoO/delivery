@@ -18,6 +18,6 @@
         <sqlFile path="scripts/010_dml_insert_status.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/011_dml_insert_dish.sql" relativeToChangelogFile="true"/>
         <sqlFile path="scripts/012_dml_insert_for_test_customer.sql" relativeToChangelogFile="true"/>
-        <sqlFile path="scripts/013_dml_insert_for_test_card.sql" relativeToChangelogFile="true"/>
+        <sqlFile path="scripts/012_dml_insert_for_test_card.sql" relativeToChangelogFile="true"/>
     </changeSet>
 </databaseChangeLog>
