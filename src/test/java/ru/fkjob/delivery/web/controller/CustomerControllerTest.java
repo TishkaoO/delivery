@@ -18,18 +18,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = TestConfig.class)
 @AutoConfigureMockMvc
-@TestPropertySource(value = {
-        "classpath:application-test.properties"
-})
 class CustomerControllerTest {
-    @Autowired
-    private CustomerRepository customerRepository;
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     void createUserTest() throws Exception {
-        customerRepository.deleteAll();
         String requestContent = "{\"username\":\"Semen34\",\"password\":\"12345678\",\"email\":\"kek@gmail.com\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/registration")
                 .contentType(MediaType.APPLICATION_JSON)

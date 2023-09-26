@@ -16,8 +16,6 @@ import ru.fkjob.delivery.store.repository.CustomerRepository;
 class CustomerServiceImplTest {
     @Autowired
     private CustomerServiceImpl customerService;
-    @Autowired
-    private CustomerRepository customerRepository;
 
     @Test
     void createTest() {
