@@ -4,7 +4,7 @@ databaseChangeLog:
       id: 090820232323
       changes:
         - sqlFile:
-            path: scripts/init/001_create_schema_delivery.sql
+            path: scripts/init/0001_create_schema_delivery.sql
             relativeToChangelogFile: true
         - sqlFile:
             path: scripts/init/002_ddl_create_customer_table.sql
@@ -13,19 +13,19 @@ databaseChangeLog:
             path: scripts/init/003_ddl_create_status_order_table.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/init/004_ddl_create_orders_table.sql
+            path: scripts/init/0002_create_orders_table.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/init/005_ddl_create_category_table.sql
+            path: scripts/init/0002_create_category_table.sql
             relativeToChangelogFile: true
         - sqlFile:
             path: scripts/init/006_ddl_create_card_table.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/init/007_ddl_create_dish_table.sql
+            path: scripts/init/0003_create_dish_table.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/init/008_ddl_create_order_dish_table.sql
+            path: scripts/init/0005_create_order_dish_table.sql
             relativeToChangelogFile: true
         - sqlFile:
             path: scripts/init/009_ddl_create_statistic_table.sql
@@ -34,5 +34,5 @@ databaseChangeLog:
             path: scripts/010_dml_insert_status.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/011_dml_insert_dish.sql
+            path: scripts/0004_insert_dish.sql
             relativeToChangelogFile: true

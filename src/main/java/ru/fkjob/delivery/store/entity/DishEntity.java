@@ -18,7 +18,7 @@ import java.util.Objects;
 public class DishEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dish_id")
+    @Column(name = "pk_dish_id")
     private Long id;
 
     @Column(nullable = false)
@@ -28,13 +28,10 @@ public class DishEntity {
     private String description;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private Double price;
 
     @Column(name = "is_stock", nullable = false)
     private boolean isStock;
-
-    @OneToMany(mappedBy = "dishEntity")
-    private List<StatisticEntity> statisticEntityList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "fk_category_id")

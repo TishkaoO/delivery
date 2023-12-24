@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+
+<changeSet id="0004_dml_insert_dish" author="K.Kirill">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="delivery" tableName="dish"/>
+        </preConditions>
+        <sqlFile dbms="postgresql"
+                 splitStatements="false"
+                 path="sql/0004_insert_dish.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+
+</databaseChangeLog>
