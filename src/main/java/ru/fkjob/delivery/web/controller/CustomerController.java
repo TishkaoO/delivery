@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-@CrossOrigin
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Api(tags = "покупатель")
 public class CustomerController {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.fkjob.delivery.web.dto.DishDTO;
 import ru.fkjob.delivery.web.service.DishService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Api(tags = "меню с информацией по блюдам")
 public class MenuController {

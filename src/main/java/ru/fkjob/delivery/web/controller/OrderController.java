@@ -11,7 +11,7 @@ import ru.fkjob.delivery.web.url.UrlContainer;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Api(tags = "заказ")
 public class OrderController {

@@ -10,7 +10,7 @@ import ru.fkjob.delivery.web.dto.CardDTO;
 import ru.fkjob.delivery.web.service.CardService;
 import ru.fkjob.delivery.web.service.PaymentService;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @Api(tags = "карта для оплаты")
 public class CardController {
