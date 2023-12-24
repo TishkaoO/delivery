@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.fkjob.delivery.web.dto.StatusOrderDTO;
 import ru.fkjob.delivery.web.service.StatusService;
 
+@CrossOrigin
 @RestController
 @Api(tags = "статус заказа")
 public class DeliveryStatusController {

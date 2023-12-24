@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+@CrossOrigin
+
 @RestController
 @Api(tags = "покупатель")
 public class CustomerController {
