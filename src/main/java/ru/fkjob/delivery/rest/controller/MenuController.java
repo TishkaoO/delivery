@@ -55,7 +55,7 @@ public class MenuController {
 
     @PutMapping("/dish/{id}")
     @Operation(summary = "редактировать блюдо")
-    public Long updateDish(@RequestParam(name = "id") Long dishId, @RequestBody DishInfoDto dto) {
+    public Long updateDish(@PathVariable(name = "id") Long dishId, @RequestBody DishInfoDto dto) {
        return dishService.updateDish(dishId, dto);
     }
 }
