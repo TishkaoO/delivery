@@ -1,4 +1,4 @@
-package ru.fkjob.delivery.rest.dto;
+package ru.fkjob.delivery.rest.dto.dish;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,7 +16,4 @@ public class DishDto {
 
     @ApiModelProperty(name = "Название блюда")
     private String name;
-
-    @ApiModelProperty(name = "Стоимость блюда")
-    private Double price;
 }

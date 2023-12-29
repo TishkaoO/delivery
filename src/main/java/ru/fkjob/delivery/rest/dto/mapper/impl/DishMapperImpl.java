@@ -1,7 +1,8 @@
 package ru.fkjob.delivery.rest.dto.mapper.impl;
 
 import org.springframework.stereotype.Component;
-import ru.fkjob.delivery.rest.dto.DishDto;
+import ru.fkjob.delivery.rest.dto.dish.DishDto;
+import ru.fkjob.delivery.rest.dto.dish.DishInfoDto;
 import ru.fkjob.delivery.rest.dto.mapper.DishMapper;
 import ru.fkjob.delivery.store.entity.DishEntity;
 
@@ -12,11 +13,20 @@ import java.util.stream.Collectors;
 public class DishMapperImpl implements DishMapper {
 
     @Override
+    public DishInfoDto toDtoInfo(DishEntity entity) {
+        return DishInfoDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .price(entity.getPrice())
+                .description(entity.getDescription())
+                .build();
+    }
+
+    @Override
     public DishDto toDto(DishEntity entity) {
         return DishDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .price(entity.getPrice())
                 .build();
     }
 
@@ -32,6 +42,15 @@ public class DishMapperImpl implements DishMapper {
         return DishEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
+                .build();
+    }
+
+    @Override
+    public DishEntity toEntity(DishInfoDto dto) {
+        return DishEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .description(dto.getDescription())
                 .price(dto.getPrice())
                 .build();
     }
