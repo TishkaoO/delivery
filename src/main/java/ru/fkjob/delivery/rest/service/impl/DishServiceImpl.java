@@ -13,6 +13,8 @@ import ru.fkjob.delivery.rest.dto.mapper.DishMapper;
 import ru.fkjob.delivery.rest.service.DishService;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +30,9 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishDto getDishByName(String name) {
-        return dishRepository.findDishEntitiesByName(name)
-                .map(entity -> dishMapper.toDto(entity))
-                .orElseThrow(() -> new EntityNotFoundException("Not found"));
+    public List<DishDto> getDishByName(String name) {
+        List<DishEntity> dishEntities = dishRepository.findDishEntitiesByName(name);
+        return dishMapper.toDto(dishEntities);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class MenuController {
 
     @GetMapping("/category/dish")
     @Operation(summary = "Получить информацию по блюду по названию")
-    public DishDto getDishByName(@RequestParam(name = "name") String name) {
+    public List<DishDto> getDishByName(@RequestParam(name = "name") String name) {
       return dishService.getDishByName(name);
     }
 

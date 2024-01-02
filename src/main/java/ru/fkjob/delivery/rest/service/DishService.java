@@ -4,10 +4,12 @@ import org.springframework.data.domain.Page;
 import ru.fkjob.delivery.rest.dto.dish.DishDto;
 import ru.fkjob.delivery.rest.dto.dish.DishInfoDto;
 
+import java.util.List;
+
 public interface DishService {
     DishInfoDto getDishEntityById(long id);
 
-    DishDto getDishByName(String name);
+    List<DishDto> getDishByName(String name);
 
     Page<DishDto> getDishByPage(int pageNo, int pageSize);
 
