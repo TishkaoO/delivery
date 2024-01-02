@@ -34,5 +34,5 @@ databaseChangeLog:
             path: scripts/010_dml_insert_status.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/0004_insert_dish.sql
+            path: scripts/0005_insert_dish.sql
             relativeToChangelogFile: true
