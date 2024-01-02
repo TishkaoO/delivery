@@ -33,7 +33,7 @@ public class DishEntity {
     @Column(name = "is_stock", nullable = false)
     private boolean isStock;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_category_id")
     private CategoryEntity categoryEntity;
 
