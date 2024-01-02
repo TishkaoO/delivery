@@ -14,4 +14,6 @@ public interface DishMapper {
     DishEntity toEntity(DishDto dto);
 
     DishEntity toEntity(DishInfoDto dto);
+
+    List<DishEntity> toEntity(List<DishDto> entity);
 }

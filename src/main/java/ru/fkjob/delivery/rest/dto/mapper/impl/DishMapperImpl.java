@@ -38,6 +38,13 @@ public class DishMapperImpl implements DishMapper {
     }
 
     @Override
+    public List<DishEntity> toEntity(List<DishDto> dtos) {
+        return dtos.stream()
+                .map(dto -> toEntity(dto))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public DishEntity toEntity(DishDto dto) {
         return DishEntity.builder()
                 .id(dto.getId())
