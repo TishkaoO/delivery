@@ -42,11 +42,6 @@ INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VAL
 INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (33,'Тирамису домашнее', 290, true, 6);
 INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (34,'Медовые хрустящие пури', 120, true, 6);
 
-
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (35,'Sweet Rolls с манго', 250, true, 6);
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (36,'Тирамису домашнее', 290, true, 6);
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (37,'Медовые хрустящие пури', 120, true, 6);
-
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (38,'Биг Бургер с курицей', 450, true, 8);
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (39,'Фирменный бургер с говядиной', 390, true, 8);
-INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (40,'Биг Бургер с говядиной', 590, true, 8);
+INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (35,'Биг Бургер с курицей', 450, true, 8);
+INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (36,'Фирменный бургер с говядиной', 390, true, 8);
+INSERT INTO delivery.dish(pk_dish_id, name, price, is_stock, fk_category_id) VALUES (37,'Биг Бургер с говядиной', 590, true, 8);
