@@ -25,11 +25,10 @@ public class MenuController {
     private final DishService dishService;
     private final CategoryService categoryService;
 
-    @GetMapping("/dish/page/{pageNo}")
-    @Operation(summary = "Список всех блюд с отображением постранично")
-    public Page<DishDto> getDishPaginated(@PathVariable(name = "pageNo") int pageNo) {
-        int pageSize = 5;
-        return dishService.getDishByPage(pageNo, pageSize);
+    @GetMapping("/dishes")
+    @Operation(summary = "Список всех блюд")
+    public List<DishDto> getDishPaginated() {
+        return dishService.getDishList();
     }
 
     @GetMapping("category/dish/{id}")

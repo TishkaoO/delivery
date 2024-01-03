@@ -11,7 +11,7 @@ public interface DishService {
 
     List<DishDto> getDishByName(String name);
 
-    Page<DishDto> getDishByPage(int pageNo, int pageSize);
+    List<DishDto> getDishList();
 
     DishInfoDto save(Long categoryId, DishInfoDto dishInfoDto);
 

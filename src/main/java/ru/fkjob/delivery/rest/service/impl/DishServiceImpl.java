@@ -39,10 +39,9 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Page<DishDto> getDishByPage(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-        Page<DishEntity> all = dishRepository.findAll(pageable);
-        return all.map(dishMapper::toDto);
+    public List<DishDto> getDishList() {
+        List<DishEntity> entities = dishRepository.findAll();
+        return dishMapper.toDto(entities);
     }
 
     @Override
