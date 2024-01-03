@@ -1,6 +1,5 @@
 package ru.fkjob.delivery.rest.service;
 
-import org.springframework.data.domain.Page;
 import ru.fkjob.delivery.rest.dto.dish.DishDto;
 import ru.fkjob.delivery.rest.dto.dish.DishInfoDto;
 
