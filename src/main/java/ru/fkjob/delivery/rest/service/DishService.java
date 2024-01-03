@@ -13,9 +13,10 @@ public interface DishService {
 
     Page<DishDto> getDishByPage(int pageNo, int pageSize);
 
-    DishInfoDto save(DishInfoDto dishInfoDto);
+    DishInfoDto save(Long categoryId, DishInfoDto dishInfoDto);
 
     Long updateDish(long dishId, DishInfoDto dishInfoDto);
 
     void deleteDishEntityById(long id);
+
 }

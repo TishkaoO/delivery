@@ -7,7 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.rest.dto.dish.DishDto;
 import ru.fkjob.delivery.rest.dto.dish.DishInfoDto;
+import ru.fkjob.delivery.store.entity.CategoryEntity;
 import ru.fkjob.delivery.store.entity.DishEntity;
+import ru.fkjob.delivery.store.repository.CategoryRepository;
 import ru.fkjob.delivery.store.repository.DishRepository;
 import ru.fkjob.delivery.rest.dto.mapper.DishMapper;
 import ru.fkjob.delivery.rest.service.DishService;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DishServiceImpl implements DishService {
     private final DishRepository dishRepository;
+    private final CategoryRepository categoryRepository;
     private final DishMapper dishMapper;
 
     @Override
@@ -43,8 +46,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishInfoDto save(DishInfoDto dishInfoDto) {
+    public DishInfoDto save(Long categoryId, DishInfoDto dishInfoDto) {
+        CategoryEntity category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("category is not found"));
         DishEntity entity = dishMapper.toEntity(dishInfoDto);
+        entity.setCategoryEntity(category);
         DishEntity save = dishRepository.save(entity);
         return dishMapper.toDtoInfo(save);
     }
