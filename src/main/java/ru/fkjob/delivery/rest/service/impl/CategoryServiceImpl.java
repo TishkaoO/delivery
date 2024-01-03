@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.rest.dto.category.CategoryDto;
 import ru.fkjob.delivery.rest.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.rest.dto.mapper.CategoryMapper;
+import ru.fkjob.delivery.rest.exception.NotFoundException;
 import ru.fkjob.delivery.rest.service.CategoryService;
 import ru.fkjob.delivery.store.entity.CategoryEntity;
 import ru.fkjob.delivery.store.repository.CategoryRepository;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,7 +27,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryInfoDto getCategoryById(Long id) {
        CategoryEntity category = categoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("category is not found"));
+               .orElseThrow(() -> new NotFoundException(
+                       String.format("Не найдена категория с id = %s", id)));
         return categoryMapper.toDtoInfo(category);
     }
 }

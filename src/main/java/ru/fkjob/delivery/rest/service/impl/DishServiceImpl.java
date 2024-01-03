@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.rest.dto.dish.DishDto;
 import ru.fkjob.delivery.rest.dto.dish.DishInfoDto;
+import ru.fkjob.delivery.rest.exception.NotFoundException;
 import ru.fkjob.delivery.store.entity.CategoryEntity;
 import ru.fkjob.delivery.store.entity.DishEntity;
 import ru.fkjob.delivery.store.repository.CategoryRepository;
@@ -25,7 +26,8 @@ public class DishServiceImpl implements DishService {
     public DishInfoDto getDishEntityById(long id) {
         return dishRepository.findById(id)
                 .map(entity -> dishMapper.toDtoInfo(entity))
-                .orElseThrow(() -> new EntityNotFoundException("Not found"));
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Не найдено блюдо с id = %s", id)));
     }
 
     @Override
@@ -43,7 +45,8 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishInfoDto save(Long categoryId, DishInfoDto dishInfoDto) {
         CategoryEntity category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new EntityNotFoundException("category is not found"));
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Не найдена категория с id = %s", categoryId)));
         DishEntity entity = dishMapper.toEntity(dishInfoDto);
         entity.setCategoryEntity(category);
         DishEntity save = dishRepository.save(entity);
@@ -53,14 +56,16 @@ public class DishServiceImpl implements DishService {
     @Override
     public void deleteDishEntityById(long id) {
         DishEntity dish = dishRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Not found"));
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Не найдено блюдо с id = %s", id)));
         dishRepository.delete(dish);
     }
 
     @Override
     public Long updateDish(long dishId, DishInfoDto dishInfoDto) {
         DishEntity dish = dishRepository.findById(dishId)
-                .orElseThrow(() -> new EntityNotFoundException("Not found"));
+                .orElseThrow(() -> new NotFoundException(
+                        String.format("Не найдено блюдо с id = %s", dishId)));
         dish.setName(dishInfoDto.getName());
         dish.setPrice(dishInfoDto.getPrice());
         dish.setDescription(dishInfoDto.getDescription());
