@@ -1,0 +1,28 @@
+server:
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/delivery}
+    username: ${DATASOURCE_USERNAME:local}
+    password: ${DATASOURCE_PASSWORD:local}
+  liquibase:
+    change-log: classpath:db/liquibase-changeLog.yaml
+    enabled: true
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 450MB
+      max-request-size: 450MB
+
+file-store:
+  url: ${DELIVERY_FILE_STORE_URL:http://localhost:9350/}
+  auth:
+    username: ${DELIVERY_FILE_STORE_USERNAME:minioadmin}
+    password: ${DELIVERY_FILE_STORE_PASSWORD:minioadmin}
+
