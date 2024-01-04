@@ -10,4 +10,6 @@ public interface CategoryService {
     List<CategoryDto> getAllCategory();
 
     CategoryInfoDto getCategoryById(Long id);
+
+    List<CategoryInfoDto> getAllCategoryDishes();
 }

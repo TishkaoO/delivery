@@ -20,4 +20,6 @@ public interface CategoryMapper {
     CategoryEntity toEntity(DishDto dto);
 
     CategoryEntity toEntity(CategoryInfoDto dto);
+
+    List<CategoryInfoDto> toDtoInfo(List<CategoryEntity> entity);
 }

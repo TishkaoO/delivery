@@ -57,4 +57,11 @@ public class CategoryMapperImpl implements CategoryMapper {
                 .dishEntities(dishMapper.toEntity(dto.getDishDtos()))
                 .build();
     }
+
+    @Override
+    public List<CategoryInfoDto> toDtoInfo(List<CategoryEntity> entity) {
+        return entity.stream()
+                .map(this::toDtoInfo)
+                .collect(Collectors.toList());
+    }
 }

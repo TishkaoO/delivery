@@ -26,7 +26,7 @@ public class MenuController {
 
     @GetMapping("/dishes")
     @Operation(summary = "Список всех блюд")
-    public List<DishDto> getDishPaginated() {
+    public List<DishDto> getDishes() {
         return dishService.getDishList();
     }
 
@@ -71,6 +71,12 @@ public class MenuController {
     @Operation(summary = "Получить информацию по категории")
     public CategoryInfoDto getCategoryById(@PathVariable(name = "id") Long id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @GetMapping("/categoryes-dish")
+    @Operation(summary = "Список всех категорий с блюдами")
+    public List<CategoryInfoDto> getCategoryDishes() {
+        return categoryService.getAllCategoryDishes();
     }
 
 }

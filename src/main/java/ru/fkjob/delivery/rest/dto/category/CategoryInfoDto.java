@@ -24,5 +24,5 @@ public class CategoryInfoDto {
     private String name;
 
     @ApiModelProperty(name = "список блюд относящиеся к категории")
-    List<DishDto> dishDtos;
+    private List<DishDto> dishDtos;
 }

@@ -31,4 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
                        String.format("Не найдена категория с id = %s", id)));
         return categoryMapper.toDtoInfo(category);
     }
+
+    @Override
+    public List<CategoryInfoDto> getAllCategoryDishes() {
+        List<CategoryEntity> category = categoryRepository.findAll();
+        return categoryMapper.toDtoInfo(category);
+    }
 }
