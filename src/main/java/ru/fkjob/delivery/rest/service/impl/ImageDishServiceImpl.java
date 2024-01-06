@@ -42,7 +42,7 @@ public class ImageDishServiceImpl {
         dish.setImage(null);
         dishRepository.save(dish);
         minioService.deleteFile(image.getUrl());
-//        imageRepository.deleteImageById(image.getId());
+        imageRepository.delete(image);
     }
 }
 
