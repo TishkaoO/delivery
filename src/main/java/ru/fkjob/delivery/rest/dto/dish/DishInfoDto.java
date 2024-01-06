@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.fkjob.delivery.rest.dto.image.ImageDishDto;
 
 import java.util.List;
 
@@ -27,6 +28,5 @@ public class DishInfoDto {
     private String description ;
 
     @ApiModelProperty(name = "картинка блюда")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<String> images;
+    private ImageDishDto imageDishDto;
 }
