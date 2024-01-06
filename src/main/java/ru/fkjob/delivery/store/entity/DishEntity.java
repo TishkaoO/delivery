@@ -35,7 +35,7 @@ public class DishEntity {
     @JoinColumn(name = "fk_category_id")
     private CategoryEntity categoryEntity;
 
-    @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL)
     private ImageEntity image;
 
     @Override

@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.fkjob.delivery.rest.dto.category.CategoryDto;
 import ru.fkjob.delivery.rest.dto.category.CategoryInfoDto;
@@ -55,9 +56,9 @@ public class MenuController {
        dishService.deleteDishEntityById(dishId);
     }
 
-    @PutMapping("/category/dish/{id}")
+    @PutMapping(value = "/category/{dishId}/dish")
     @Operation(summary = "редактировать блюдо")
-    public Long updateDish(@PathVariable(name = "id") final Long dishId, @RequestBody final DishInfoDto dto) {
+    public Long updateDish(@PathVariable(name = "dishId") final Long dishId, @RequestBody final DishInfoDto dto) {
        return dishService.updateDish(dishId, dto);
     }
 

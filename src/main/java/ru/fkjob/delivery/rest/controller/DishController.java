@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fkjob.delivery.rest.dto.image.ImageDishDto;
 import ru.fkjob.delivery.rest.service.impl.ImageDishServiceImpl;
-import ru.fkjob.delivery.store.entity.ImageEntity;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -28,13 +27,7 @@ public class DishController {
         @DeleteMapping(value = "/{dishId}/image")
         @Operation(summary = "удалить изображение для блюда")
         @ResponseStatus(code = HttpStatus.NO_CONTENT)
-        public void deleteImage(@PathVariable("dishId") final Long dishId, @RequestParam("fileId") final Long fileId) {
-            fileService.deleteImage(dishId, fileId);
+        public void deleteImage(@PathVariable("dishId") final Long dishId, @RequestParam("id") final Long id) {
+            fileService.deleteImage(dishId, id);
         }
-    //
-//    @PutMapping(value = "/{dishId}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @Operation(summary = "обновить изображение для блюда")
-//    public ImageDishDto updateImage(@PathVariable("dishId") final Long dishId, @RequestPart("file") final MultipartFile file) {
-//        return fileService.updateFile(dishId, file);
-//    }
 }

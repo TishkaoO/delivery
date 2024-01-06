@@ -22,11 +22,8 @@ public class DishInfoDto {
     private String name;
 
     @ApiModelProperty(name = "стоимость блюда")
-    private Double price ;
+    private Double price;
 
     @ApiModelProperty(name = "описание блюда")
-    private String description ;
-
-    @ApiModelProperty(name = "картинка блюда")
-    private ImageDishDto imageDishDto;
+    private String description;
 }
