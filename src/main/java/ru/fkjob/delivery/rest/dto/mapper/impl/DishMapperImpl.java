@@ -54,7 +54,6 @@ public class DishMapperImpl implements DishMapper {
     @Override
     public DishEntity toEntity(DishInfoDto dto) {
         return DishEntity.builder()
-                .id(dto.getId())
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .price(dto.getPrice())
