@@ -18,6 +18,8 @@ import java.util.List;
 @ApiModel(description = "Представляет полную информацию по блюду")
 public class DishInfoDto {
 
+    private Long id;
+
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
