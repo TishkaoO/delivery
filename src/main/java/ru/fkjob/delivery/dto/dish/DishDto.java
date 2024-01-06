@@ -1,11 +1,9 @@
 package ru.fkjob.delivery.dto.dish;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-
-import java.util.List;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
 
 @Builder
 @Data
@@ -20,7 +18,7 @@ public class DishDto {
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
-    @ApiModelProperty(name = "картинка блюда")
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<String> images;
+    //TODO:решить с картинкой
+//    @ApiModelProperty(name = "Картинка блюда")
+//    private String url;
 }

@@ -1,4 +1,4 @@
-package ru.fkjob.delivery.dto.mappers.category;
+package ru.fkjob.delivery.mappers.category;
 
 import org.mapstruct.Mapper;
 import ru.fkjob.delivery.dto.dish.DishDto;

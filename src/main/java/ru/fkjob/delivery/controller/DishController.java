@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.service.ImageFileService;
-import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController

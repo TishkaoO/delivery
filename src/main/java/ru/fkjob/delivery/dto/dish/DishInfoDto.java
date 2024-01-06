@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
 
 @Builder
 @Data
@@ -25,4 +26,8 @@ public class DishInfoDto {
 
     @ApiModelProperty(name = "Описание блюда")
     private String description;
+
+    //TODO:решить с картинкой
+//    @ApiModelProperty(name = "Картинка блюда")
+//    private String url;
 }

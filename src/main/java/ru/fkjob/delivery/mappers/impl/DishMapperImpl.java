@@ -1,15 +1,17 @@
-package ru.fkjob.delivery.dto.mappers.impl;
+package ru.fkjob.delivery.mappers.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
-import ru.fkjob.delivery.dto.mappers.dish.DishMapper;
+import ru.fkjob.delivery.mappers.dish.DishMapper;
 import ru.fkjob.delivery.entity.DishEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class DishMapperImpl implements DishMapper {
 
     @Override

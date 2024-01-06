@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
-import ru.fkjob.delivery.dto.mappers.category.CategoryMapper;
+import ru.fkjob.delivery.mappers.category.CategoryMapper;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.service.CategoryService;
 import ru.fkjob.delivery.entity.CategoryEntity;

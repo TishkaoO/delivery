@@ -1,12 +1,12 @@
-package ru.fkjob.delivery.dto.mappers.impl;
+package ru.fkjob.delivery.mappers.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.dto.dish.DishDto;
-import ru.fkjob.delivery.dto.mappers.category.CategoryMapper;
-import ru.fkjob.delivery.dto.mappers.dish.DishMapper;
+import ru.fkjob.delivery.mappers.category.CategoryMapper;
+import ru.fkjob.delivery.mappers.dish.DishMapper;
 import ru.fkjob.delivery.entity.CategoryEntity;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.fkjob.delivery.dto.mappers.image;
+package ru.fkjob.delivery.mappers.image;
 
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.entity.ImageEntity;

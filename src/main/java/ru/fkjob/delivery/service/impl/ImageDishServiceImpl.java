@@ -8,6 +8,7 @@ import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.entity.DishEntity;
 import ru.fkjob.delivery.entity.ImageEntity;
+import ru.fkjob.delivery.mappers.image.ImageDishMapper;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.repository.ImageFileRepository;
 import ru.fkjob.delivery.service.ImageFileService;
@@ -19,6 +20,7 @@ public class ImageDishServiceImpl implements ImageFileService {
     private final ImageFileRepository imageRepository;
     private final MinioService minioService;
     private final DishRepository dishRepository;
+    private final ImageDishMapper imageDishMapper;
 
     @Override
     public ImageDishDto uploadImage(final Long dishId, final MultipartFile file) {
@@ -29,10 +31,7 @@ public class ImageDishServiceImpl implements ImageFileService {
         image.setUrl(imageUrl);
         image.setDish(dish);
         ImageEntity entity = imageRepository.save(image);
-        return ImageDishDto.builder()
-                .id(entity.getId())
-                .url(entity.getUrl())
-                .build();
+        return imageDishMapper.toDto(entity);
     }
 
     @Override

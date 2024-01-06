@@ -10,7 +10,7 @@ import ru.fkjob.delivery.entity.CategoryEntity;
 import ru.fkjob.delivery.entity.DishEntity;
 import ru.fkjob.delivery.repository.CategoryRepository;
 import ru.fkjob.delivery.repository.DishRepository;
-import ru.fkjob.delivery.dto.mappers.dish.DishMapper;
+import ru.fkjob.delivery.mappers.dish.DishMapper;
 
 import java.util.List;
 
