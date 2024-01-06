@@ -19,4 +19,9 @@ spring:
     multipart:
       max-file-size: 450MB
       max-request-size: 450MB
+  minio:
+    endpoint: ${DELIVERY_MINIO_URL:http://localhost:9000}
+    accessKey: ${DELIVERY_MINIO_URL:minioadmin}
+    secretKey: ${DELIVERY_MINIO_URL:minioadmin}
+    bucket: ${DELIVERY_MINIO_BUCKET:delivery}
 
