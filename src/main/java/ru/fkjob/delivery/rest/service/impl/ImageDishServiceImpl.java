@@ -1,11 +1,8 @@
 package ru.fkjob.delivery.rest.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fkjob.delivery.rest.dto.image.ImageDishDto;
 import ru.fkjob.delivery.rest.exception.NotFoundException;
@@ -37,7 +34,6 @@ public class ImageDishServiceImpl {
         return dto;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void deleteImage(final Long dishId, final Long imageId) {
         DishEntity dish = dishRepository.findById(dishId)
                 .orElseThrow(() -> new NotFoundException(String.format("Не найдено блюдо с id = %s", dishId)));
@@ -46,7 +42,7 @@ public class ImageDishServiceImpl {
         dish.setImage(null);
         dishRepository.save(dish);
         minioService.deleteFile(image.getUrl());
-        imageRepository.deleteImageById(image.getId());
+//        imageRepository.deleteImageById(image.getId());
     }
 }
 

@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ImageFileRepository extends JpaRepository<ImageEntity, Long> {
 
-    @Query(value = "DELETE FROM delivery.image WHERE pk_image_id = :id" , nativeQuery = true)
-    void deleteImageById(@Param("id") Long id);
+//    @Query(value = "DELETE FROM delivery.image WHERE pk_image_id = :id" , nativeQuery = true)
+//    void deleteImageById(@Param("id") Long id);
 }

@@ -42,7 +42,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public DishInfoDto save(final Long categoryId, final DishInfoDto dishInfoDto) {
+    public DishInfoDto save(final DishInfoDto dishInfoDto, final Long categoryId) {
         CategoryEntity category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new NotFoundException(
                         String.format("Не найдена категория с id = %s", categoryId)));
@@ -69,12 +69,5 @@ public class DishServiceImpl implements DishService {
         dish.setPrice(dishInfoDto.getPrice());
         dish.setDescription(dishInfoDto.getDescription());
         return dishRepository.save(dish).getId();
-    }
-
-    private boolean isCheckDish(DishDto dto) {
-        if (dto.getName().equals("суп"))  {
-            throw new NotFoundException("Суп уже создан");
-        }
-        return true;
     }
 }

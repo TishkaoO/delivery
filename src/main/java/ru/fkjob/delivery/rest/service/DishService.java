@@ -12,7 +12,7 @@ public interface DishService {
 
     List<DishDto> getDishList();
 
-    DishInfoDto save(Long categoryId, DishInfoDto dishInfoDto);
+    DishInfoDto save(DishInfoDto dishInfoDto, Long categoryId);
 
     Long updateDish(Long dishId, DishInfoDto dishInfoDto);
 

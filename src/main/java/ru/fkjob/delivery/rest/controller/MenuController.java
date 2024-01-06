@@ -37,10 +37,10 @@ public class MenuController {
         return dishService.getDishEntityById(id);
     }
 
-    @PostMapping("/category/dish/create/{id}")
+    @PostMapping("/category/dish/create")
     @Operation(summary = "создать новое блюдо")
-    public DishInfoDto getDishById(@PathVariable(name = "id") final Long categoryId, @RequestBody DishInfoDto dishInfoDto) {
-        return dishService.save(categoryId, dishInfoDto);
+    public DishInfoDto getDishById(@RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
+        return dishService.save(dishInfoDto, categoryId);
     }
 
     @GetMapping("/category/dish")
