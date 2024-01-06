@@ -13,6 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "dish", schema = "delivery")
 public class DishEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_dish_id")
@@ -33,6 +34,9 @@ public class DishEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_category_id")
     private CategoryEntity categoryEntity;
+
+    @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ImageEntity image;
 
     @Override
     public boolean equals(Object o) {

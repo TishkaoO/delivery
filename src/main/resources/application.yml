@@ -20,9 +20,3 @@ spring:
       max-file-size: 450MB
       max-request-size: 450MB
 
-file-store:
-  url: ${DELIVERY_FILE_STORE_URL:http://localhost:9350/}
-  auth:
-    username: ${DELIVERY_FILE_STORE_USERNAME:minioadmin}
-    password: ${DELIVERY_FILE_STORE_PASSWORD:minioadmin}
-

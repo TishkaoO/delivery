@@ -32,32 +32,32 @@ public class MenuController {
 
     @GetMapping("category/dish/{id}")
     @Operation(summary = "Получить информацию по блюду")
-    public DishInfoDto getDishById(@PathVariable(name = "id") Long id) {
+    public DishInfoDto getDishById(@PathVariable(name = "id") final Long id) {
         return dishService.getDishEntityById(id);
     }
 
     @PostMapping("/category/dish/create/{id}")
     @Operation(summary = "создать новое блюдо")
-    public DishInfoDto getDishById(@PathVariable(name = "id") Long categoryId, @RequestBody DishInfoDto dishInfoDto) {
+    public DishInfoDto getDishById(@PathVariable(name = "id") final Long categoryId, @RequestBody DishInfoDto dishInfoDto) {
         return dishService.save(categoryId, dishInfoDto);
     }
 
     @GetMapping("/category/dish")
     @Operation(summary = "Получить информацию по блюду по названию")
-    public List<DishDto> getDishByName(@RequestParam(name = "name") String name) {
+    public List<DishDto> getDishByName(@RequestParam(name = "name") final String name) {
       return dishService.getDishByName(name);
     }
 
     @DeleteMapping("/category/dish")
     @Operation(summary = "Удалить блюдо")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void getDishByName(@RequestParam(name = "dishId") Long dishId) {
+    public void getDishByName(@RequestParam(name = "dishId") final Long dishId) {
        dishService.deleteDishEntityById(dishId);
     }
 
     @PutMapping("/category/dish/{id}")
     @Operation(summary = "редактировать блюдо")
-    public Long updateDish(@PathVariable(name = "id") Long dishId, @RequestBody DishInfoDto dto) {
+    public Long updateDish(@PathVariable(name = "id") final Long dishId, @RequestBody final DishInfoDto dto) {
        return dishService.updateDish(dishId, dto);
     }
 
@@ -69,7 +69,7 @@ public class MenuController {
 
     @GetMapping("/category/{id}")
     @Operation(summary = "Получить информацию по категории")
-    public CategoryInfoDto getCategoryById(@PathVariable(name = "id") Long id) {
+    public CategoryInfoDto getCategoryById(@PathVariable(name = "id") final Long id) {
         return categoryService.getCategoryById(id);
     }
 

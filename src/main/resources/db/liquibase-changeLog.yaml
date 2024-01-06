@@ -9,4 +9,6 @@ databaseChangeLog:
       file: db/changelog/0004_dml_insert_category.xml
   - include:
       file: db/changelog/0005_dml_insert_dish.xml
+  - include:
+      file: db/changelog/0006_ddl_create_image_table.xml
 

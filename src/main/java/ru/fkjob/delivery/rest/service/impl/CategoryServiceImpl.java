@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryInfoDto getCategoryById(Long id) {
+    public CategoryInfoDto getCategoryById(final Long id) {
        CategoryEntity category = categoryRepository.findById(id)
                .orElseThrow(() -> new NotFoundException(
                        String.format("Не найдена категория с id = %s", id)));
