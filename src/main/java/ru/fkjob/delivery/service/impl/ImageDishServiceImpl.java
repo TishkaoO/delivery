@@ -10,15 +10,17 @@ import ru.fkjob.delivery.entity.DishEntity;
 import ru.fkjob.delivery.entity.ImageEntity;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.repository.ImageFileRepository;
+import ru.fkjob.delivery.service.ImageFileService;
+import ru.fkjob.delivery.service.MinioService;
 
 @Service
 @RequiredArgsConstructor
-public class ImageDishServiceImpl {
+public class ImageDishServiceImpl implements ImageFileService {
     private final ImageFileRepository imageRepository;
-    private final MinioServiceImpl minioService;
+    private final MinioService minioService;
     private final DishRepository dishRepository;
 
-
+    @Override
     public ImageDishDto uploadImage(final Long dishId, final MultipartFile file) {
         String imageUrl = minioService.uploadFile(file);
         DishEntity dish = dishRepository.findById(dishId)
@@ -27,12 +29,13 @@ public class ImageDishServiceImpl {
         image.setUrl(imageUrl);
         image.setDish(dish);
         ImageEntity entity = imageRepository.save(image);
-        ImageDishDto dto = new ImageDishDto();
-        dto.setId(entity.getId());
-        dto.setUrl(entity.getUrl());
-        return dto;
+        return ImageDishDto.builder()
+                .id(entity.getId())
+                .url(entity.getUrl())
+                .build();
     }
 
+    @Override
     public void deleteImage(final Long dishId, final Long imageId) {
         DishEntity dish = dishRepository.findById(dishId)
                 .orElseThrow(() -> new NotFoundException(String.format("Не найдено блюдо с id = %s", dishId)));

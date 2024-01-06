@@ -23,6 +23,7 @@
         <testcontainers-junit-jupiter.version>1.18.3</testcontainers-junit-jupiter.version>
         <minio.version>8.5.2</minio.version>
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
     </properties>
 
     <dependencies>
@@ -78,6 +79,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
 
         <dependency>

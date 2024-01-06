@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
+import ru.fkjob.delivery.service.ImageFileService;
 import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -16,7 +17,7 @@ import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 @Api(tags = "для работы с блюдом")
 @RequiredArgsConstructor
 public class DishController {
-    private final ImageDishServiceImpl fileService;
+    private final ImageFileService fileService;
 
     @PostMapping(value = "/{dishId}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить изображение для блюда")

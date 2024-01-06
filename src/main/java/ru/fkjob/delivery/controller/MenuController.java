@@ -20,7 +20,6 @@ import java.util.List;
 @Api(tags = "меню с информацией по блюдам")
 @RequiredArgsConstructor
 public class MenuController {
-
     private final DishService dishService;
     private final CategoryService categoryService;
 
