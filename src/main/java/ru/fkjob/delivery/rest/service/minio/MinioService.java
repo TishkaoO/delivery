@@ -43,7 +43,7 @@ public class MinioService {
                     .bucket(bucketName)
                     .object(objectName)
                     .stream(stream, file.getSize(), -1)
-                    .contentType(MediaType.IMAGE_JPEG_VALUE)
+                    .contentType("image/svg+xml")
                     .build());
         }
 
