@@ -17,9 +17,6 @@ import java.util.List;
 @ApiModel(description = "Представляет полную информацию по блюду")
 public class DishInfoDto {
 
-    @ApiModelProperty(name = "Идентификатор блюда")
-    private Long id;
-
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
