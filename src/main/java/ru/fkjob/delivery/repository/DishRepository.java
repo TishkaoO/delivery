@@ -9,7 +9,11 @@ import java.util.List;
 
 public interface DishRepository extends JpaRepository<DishEntity, Long> {
 
-    @Query(value = "SELECT * FROM delivery.dish WHERE name ILIKE %:name%",
+    @Query(value = "SELECT * FROM delivery.dish WHERE name ILIKE :name% order by name LIMIT 10",
+            nativeQuery = true)
+    List<DishEntity> findDishEntitiesByNameStartWithName(@Param("name") String name);
+
+    @Query(value = "SELECT * FROM delivery.dish WHERE name ILIKE %:name% order by name LIMIT 10",
             nativeQuery = true)
     List<DishEntity> findDishEntitiesByName(@Param("name") String name);
 }

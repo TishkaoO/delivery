@@ -31,7 +31,11 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public List<DishDto> getDishByName(final String name) {
-        List<DishEntity> dishEntities = dishRepository.findDishEntitiesByName(name);
+        List<DishEntity> dishEntities = dishRepository.findDishEntitiesByNameStartWithName(name);
+        if (dishEntities.isEmpty()) {
+            List<DishEntity> dish = dishRepository.findDishEntitiesByName(name);
+            return dishMapper.toDto(dish);
+        }
         return dishMapper.toDto(dishEntities);
     }
 
