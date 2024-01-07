@@ -12,6 +12,7 @@ import ru.fkjob.delivery.dto.dish.DishInfoDto;
 import ru.fkjob.delivery.service.CategoryService;
 import ru.fkjob.delivery.service.DishService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -37,7 +38,7 @@ public class MenuController {
 
     @PostMapping("/category/dish/create")
     @Operation(summary = "создать новое блюдо")
-    public DishInfoDto getDishById(@RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
+    public DishInfoDto getDishById(@Valid @RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
         return dishService.save(dishInfoDto, categoryId);
     }
 
@@ -56,7 +57,7 @@ public class MenuController {
 
     @PutMapping(value = "/category/{dishId}/dish")
     @Operation(summary = "редактировать блюдо")
-    public Long updateDish(@PathVariable(name = "dishId") final Long dishId, @RequestBody final DishInfoDto dto) {
+    public Long updateDish(@PathVariable(name = "dishId") final Long dishId, @Valid @RequestBody final DishInfoDto dto) {
         return dishService.updateDish(dishId, dto);
     }
 

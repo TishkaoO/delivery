@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fkjob.delivery.dto.image.ImageDishDto;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Builder
 @Data
@@ -18,12 +21,16 @@ public class DishInfoDto {
     @ApiModelProperty(name = "Идентификатор блюда")
     private Long id;
 
+    @NotEmpty(message = "Пожалуйста укажите название")
+    @Pattern(regexp = "^[\\p{L}]*$", message = "Название может содержать только буквы")
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
+    @Min(0)
     @ApiModelProperty(name = "Стоимость блюда")
     private Double price;
 
+    @Pattern(regexp = "^[\\p{L}]*$", message = "Описание может содержать только буквы")
     @ApiModelProperty(name = "Описание блюда")
     private String description;
 

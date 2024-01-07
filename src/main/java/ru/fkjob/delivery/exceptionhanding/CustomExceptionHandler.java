@@ -1,0 +1,123 @@
+package ru.fkjob.delivery.exceptionhanding;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import ru.fkjob.delivery.exception.NotFoundException;
+import ru.fkjob.delivery.exceptionhanding.customexception.BadRequestException;
+import ru.fkjob.delivery.exceptionhanding.customexception.ExceptionMessage;
+import ru.fkjob.delivery.exceptionhanding.customexception.NotValidExceptionMessage;
+
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        ExceptionMessage exceptionMessage = new ExceptionMessage(
+                LocalDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getContextPath()
+        );
+        return new ResponseEntity<>(exceptionMessage, status);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        Map<String, String> errorMap = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error -> errorMap.put(error.getField(), error.getDefaultMessage()));
+        NotValidExceptionMessage apiException = new NotValidExceptionMessage(
+                LocalDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                errorMap,
+                request.getContextPath()
+        );
+        return new ResponseEntity<>(apiException, status);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(
+            MissingServletRequestParameterException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        ExceptionMessage exceptionMessage = new ExceptionMessage(
+                LocalDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getContextPath()
+        );
+        return new ResponseEntity<>(exceptionMessage, status);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleExceptionInternal(
+            Exception ex,
+            Object body,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        ExceptionMessage exceptionMessage = new ExceptionMessage(
+                LocalDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getContextPath()
+        );
+        return new ResponseEntity<>(exceptionMessage, status);
+    }
+
+
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handleApiRequestException(NotFoundException e, HttpServletRequest request) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        ExceptionMessage exceptionMessage = new ExceptionMessage(
+                LocalDateTime.now(),
+                httpStatus.value(),
+                httpStatus.getReasonPhrase(),
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(exceptionMessage, httpStatus);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Object> handleApiBadRequestException(BadRequestException e, HttpServletRequest request) {
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        ExceptionMessage exceptionMessage = new ExceptionMessage(
+                LocalDateTime.now(),
+                httpStatus.value(),
+                httpStatus.getReasonPhrase(),
+                e.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(exceptionMessage, httpStatus);
+    }
+}
