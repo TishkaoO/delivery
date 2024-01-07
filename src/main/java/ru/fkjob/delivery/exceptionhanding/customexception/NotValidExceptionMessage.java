@@ -11,13 +11,16 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor
-@ApiModel("Модель данных представляет собой инфомарцию об ошибке")
+@ApiModel("Недопустимое сообщение об исключении")
 public class NotValidExceptionMessage {
+
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @ApiModelProperty(name = "Дата ошибки")
     private final LocalDateTime timestamp;
+
     @ApiModelProperty(name = "Код ответа")
     private final int status;
+
     @ApiModelProperty(name = "Что за ошибка")
     private final String error;
 

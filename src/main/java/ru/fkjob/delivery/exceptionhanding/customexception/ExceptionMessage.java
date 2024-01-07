@@ -7,15 +7,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
-@ApiModel(description = "Модель представляет вид ошибки")
+@ApiModel("Сообщение об исключении")
 public class ExceptionMessage {
+
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime timestamp;
-    private int status;
-    private String error;
-    private String message;
-    private String path;
+    @ApiModelProperty(name = "Дата ошибки")
+    private final LocalDateTime timestamp;
+
+    @ApiModelProperty(name = "Код ответа")
+    private final int status;
+
+    @ApiModelProperty(name = "Что за ошибка")
+    private final String error;
+
+    @ApiModelProperty(name = "Информация об ошибке")
+    private final Map<String,String> message;
+
+    @ApiModelProperty(name = "Адрес запроса")
+    private final String path;
 }
