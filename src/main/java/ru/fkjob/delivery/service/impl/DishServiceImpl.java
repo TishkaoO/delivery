@@ -57,8 +57,13 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishInfoDto save(final DishInfoDto dishInfoDto, final Long categoryId) {
         CategoryEntity category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Не найдена категория с id = %s", categoryId)));
+                .orElseThrow(() -> {
+                            NotFoundException notFoundException = new NotFoundException(
+                                    String.format("Не найдена категория с id = %s", categoryId));
+                            log.warn("getDishEntityById: ", notFoundException);
+                            return notFoundException;
+                        }
+                );
         DishEntity entity = dishMapper.toEntity(dishInfoDto);
         entity.setCategoryEntity(category);
         DishEntity save = dishRepository.save(entity);
@@ -68,16 +73,26 @@ public class DishServiceImpl implements DishService {
     @Override
     public void deleteDishEntityById(final Long id) {
         DishEntity dish = dishRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Не найдено блюдо с id = %s", id)));
+                .orElseThrow(() -> {
+                            NotFoundException notFoundException = new NotFoundException(
+                                    String.format("Не найдено блюдо с id = %s", id));
+                            log.warn("getDishEntityById: ", notFoundException);
+                            return notFoundException;
+                        }
+                );
         dishRepository.delete(dish);
     }
 
     @Override
     public Long updateDish(final Long dishId, final DishInfoDto dishInfoDto) {
         DishEntity dish = dishRepository.findById(dishId)
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Не найдено блюдо с id = %s", dishId)));
+                .orElseThrow(() -> {
+                            NotFoundException notFoundException = new NotFoundException(
+                                    String.format("Не найдено блюдо с id = %s", dishId));
+                            log.warn("getDishEntityById: ", notFoundException);
+                            return notFoundException;
+                        }
+                );
         dish.setName(dishInfoDto.getName());
         dish.setPrice(dishInfoDto.getPrice());
         dish.setDescription(dishInfoDto.getDescription());
