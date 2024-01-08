@@ -1,6 +1,9 @@
 package ru.fkjob.delivery.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
@@ -16,6 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DishServiceImpl implements DishService {
     private final DishRepository dishRepository;
     private final CategoryRepository categoryRepository;
@@ -25,8 +29,13 @@ public class DishServiceImpl implements DishService {
     public DishInfoDto getDishEntityById(final Long id) {
         return dishRepository.findById(id)
                 .map(entity -> dishMapper.toDtoInfo(entity))
-                .orElseThrow(() -> new NotFoundException(
-                        String.format("Не найдено блюдо с id = %s", id)));
+                .orElseThrow(() -> {
+                            NotFoundException notFoundException = new NotFoundException(
+                                    String.format("Не найдено блюдо с id = %s", id));
+                            log.warn("getDishEntityById: ", notFoundException);
+                            return notFoundException;
+                        }
+                );
     }
 
     @Override

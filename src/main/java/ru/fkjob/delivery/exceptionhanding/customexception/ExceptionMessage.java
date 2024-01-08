@@ -18,18 +18,18 @@ public class ExceptionMessage {
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @ApiModelProperty(name = "Дата ошибки")
-    private final LocalDateTime timestamp;
+    private LocalDateTime timestamp;
 
     @ApiModelProperty(name = "Код ответа")
-    private final int status;
+    private int status;
 
     @ApiModelProperty(name = "Что за ошибка")
-    private final String error;
+    private String error;
 
     @ApiModelProperty(name = "Информация об ошибке")
-    private final String message;
+    private String message;
 
     @ApiModelProperty(name = "Адрес запроса")
-    private final String path;
+    private String path;
 
 }

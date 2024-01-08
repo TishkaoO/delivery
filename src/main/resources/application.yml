@@ -25,3 +25,4 @@ spring:
     secretKey: ${DELIVERY_MINIO_URL:minioadmin}
     bucket: ${DELIVERY_MINIO_BUCKET:delivery}
 
+
