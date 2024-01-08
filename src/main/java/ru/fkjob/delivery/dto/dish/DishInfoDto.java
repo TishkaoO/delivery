@@ -22,7 +22,7 @@ public class DishInfoDto {
     private Long id;
 
     @NotEmpty(message = "Пожалуйста укажите название")
-    @Pattern(regexp = "^[\\p{L}]*$", message = "Название может содержать только буквы")
+    @Pattern(regexp = "^[\\p{L}\\s]*$", message = "Название может содержать только буквы")
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
@@ -30,7 +30,7 @@ public class DishInfoDto {
     @ApiModelProperty(name = "Стоимость блюда")
     private Double price;
 
-    @Pattern(regexp = "^[\\p{L}]*$", message = "Описание может содержать только буквы")
+    @Pattern(regexp = "^[\\p{L}\\s]*$", message = "Описание может содержать только буквы")
     @ApiModelProperty(name = "Описание блюда")
     private String description;
 
