@@ -30,13 +30,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        ExceptionMessage exceptionMessage = new ExceptionMessage(
-                LocalDateTime.now(),
-                status.value(),
-                status.getReasonPhrase(),
-                ex.getMessage(),
-                request.getContextPath()
-        );
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(ex.getMessage())
+                .path(request.getContextPath())
+                .build();
+
         return new ResponseEntity<>(exceptionMessage, status);
     }
 
@@ -64,13 +65,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        ExceptionMessage exceptionMessage = new ExceptionMessage(
-                LocalDateTime.now(),
-                status.value(),
-                status.getReasonPhrase(),
-                ex.getMessage(),
-                request.getContextPath()
-        );
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(ex.getMessage())
+                .path(request.getContextPath())
+                .build();
         return new ResponseEntity<>(exceptionMessage, status);
     }
 
@@ -81,13 +82,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        ExceptionMessage exceptionMessage = new ExceptionMessage(
-                LocalDateTime.now(),
-                status.value(),
-                status.getReasonPhrase(),
-                ex.getMessage(),
-                request.getContextPath()
-        );
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(ex.getMessage())
+                .path(request.getContextPath())
+                .build();
         return new ResponseEntity<>(exceptionMessage, status);
     }
 
@@ -97,13 +98,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> handleApiRequestException(NotFoundException e, HttpServletRequest request) {
         HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-        ExceptionMessage exceptionMessage = new ExceptionMessage(
-                LocalDateTime.now(),
-                httpStatus.value(),
-                httpStatus.getReasonPhrase(),
-                e.getMessage(),
-                request.getRequestURI()
-        );
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(httpStatus.value())
+                .error(httpStatus.getReasonPhrase())
+                .message(e.getMessage())
+                .path(request.getContextPath())
+                .build();
         return new ResponseEntity<>(exceptionMessage, httpStatus);
     }
 
@@ -111,13 +112,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<Object> handleApiBadRequestException(BadRequestException e, HttpServletRequest request) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-        ExceptionMessage exceptionMessage = new ExceptionMessage(
-                LocalDateTime.now(),
-                httpStatus.value(),
-                httpStatus.getReasonPhrase(),
-                e.getMessage(),
-                request.getRequestURI()
-        );
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(httpStatus.value())
+                .error(httpStatus.getReasonPhrase())
+                .message(e.getMessage())
+                .path(request.getContextPath())
+                .build();
         return new ResponseEntity<>(exceptionMessage, httpStatus);
     }
 }

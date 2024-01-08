@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
+@Builder
 @Data
 @AllArgsConstructor
 @ApiModel("Сообщение об исключении")
@@ -25,8 +27,9 @@ public class ExceptionMessage {
     private final String error;
 
     @ApiModelProperty(name = "Информация об ошибке")
-    private final Map<String,String> message;
+    private final String message;
 
     @ApiModelProperty(name = "Адрес запроса")
     private final String path;
+
 }
