@@ -1,6 +1,7 @@
 package ru.fkjob.delivery.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class MenuController {
 
     @GetMapping("category/dish/{id}")
     @Operation(summary = "Получить информацию по блюду")
-    public DishInfoDto getDishById(@PathVariable(name = "id") final Long id) {
+    public DishInfoDto getDishById(@ApiParam("индентификатор блюда") @PathVariable(name = "id") final Long id) {
         return dishService.getDishEntityById(id);
     }
 
