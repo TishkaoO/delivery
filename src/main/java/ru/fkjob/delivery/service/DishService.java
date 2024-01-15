@@ -18,4 +18,6 @@ public interface DishService {
 
     void deleteDishEntityById(Long id);
 
+    List<DishDto> getDishByIsStock();
+
 }

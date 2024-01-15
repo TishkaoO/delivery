@@ -80,4 +80,10 @@ public class MenuController {
         return categoryService.getAllCategoryDishes();
     }
 
+    @GetMapping("/dishes-isStock")
+    @Operation(summary = "Список всех блюд")
+    public List<DishDto> getDishesByIsStock() {
+        return dishService.getDishByIsStock();
+    }
+
 }

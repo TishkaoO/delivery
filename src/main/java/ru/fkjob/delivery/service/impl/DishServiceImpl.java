@@ -97,4 +97,10 @@ public class DishServiceImpl implements DishService {
         dish.setDescription(dishInfoDto.getDescription());
         return dishRepository.save(dish).getId();
     }
+
+    @Override
+    public List<DishDto> getDishByIsStock() {
+        List<DishEntity> entities = dishRepository.findDishEntitiesByStockIsTrue();
+        return dishMapper.toDto(entities);
+    }
 }
