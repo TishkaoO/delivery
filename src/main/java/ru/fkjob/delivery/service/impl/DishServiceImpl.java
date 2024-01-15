@@ -2,8 +2,7 @@ package ru.fkjob.delivery.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
@@ -51,7 +50,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishDto> getDishList() {
         List<DishEntity> entities = dishRepository.findAll();
-        return dishMapper.toDto(entities);
+        return dishMapper.toDto(entities);  
     }
 
     @Override

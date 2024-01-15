@@ -24,14 +24,21 @@ public class ImageDishServiceImpl implements ImageFileService {
 
     @Override
     public ImageDishDto uploadImage(final Long dishId, final MultipartFile file) {
-        String imageUrl = minioService.uploadFile(file);
         DishEntity dish = dishRepository.findById(dishId)
                 .orElseThrow(() -> new NotFoundException(String.format("Не найдено блюдо с id = %s", dishId)));
-        ImageEntity image = new ImageEntity();
-        image.setUrl(imageUrl);
-        image.setDish(dish);
-        ImageEntity entity = imageRepository.save(image);
-        return imageDishMapper.toDto(entity);
+        String imageUrl = minioService.uploadFile(file);
+        ImageEntity image = imageRepository.findFirstByDish(dish)
+                .map(img -> {
+                    img.setUrl(imageUrl);
+                    return imageRepository.save(img);
+                })
+                .orElseGet(() -> {
+                    ImageEntity newImage = new ImageEntity();
+                    newImage.setUrl(imageUrl);
+                    newImage.setDish(dish);
+                    return imageRepository.save(newImage);
+                });
+        return imageDishMapper.toDto(image);
     }
 
     @Override
