@@ -21,6 +21,7 @@ public class DishMapperImpl implements DishMapper {
                 .name(entity.getName())
                 .price(entity.getPrice())
                 .description(entity.getDescription())
+                .url(entity.getImage().getUrl())
                 .build();
     }
 

@@ -34,7 +34,6 @@ public class DishInfoDto {
     @ApiModelProperty(name = "Описание блюда")
     private String description;
 
-    //TODO:решить с картинкой
-//    @ApiModelProperty(name = "Картинка блюда")
-//    private String url;
+    @ApiModelProperty(name = "Картинка блюда")
+    private String url;
 }
