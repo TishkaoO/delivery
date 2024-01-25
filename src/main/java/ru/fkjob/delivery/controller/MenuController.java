@@ -39,7 +39,7 @@ public class MenuController {
     public DishInfoDto getDishById(@ApiParam("индентификатор блюда") @PathVariable(name = "id") final Long id) {
        DishInfoDto dish = dishService.getDishEntityById(id);
         if (dish.getImage().getId() == null) {
-            dish.setImage(null);
+            dish.setImage(new ImageDishDto());
         }
         return dish;
     }
