@@ -28,7 +28,10 @@ public class DishMapperImpl implements DishMapper {
     }
 
     private ImageDishDto getEntityImage(ImageEntity entity) {
-        return new ImageDishDto(entity.getId(), entity.getUrl());
+        if (entity.getId() == null) {
+            return new ImageDishDto();
+        }
+         return new ImageDishDto(entity.getId(), entity.getUrl());
     }
 
     @Override

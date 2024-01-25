@@ -37,11 +37,7 @@ public class MenuController {
     @GetMapping("category/dish/{id}")
     @Operation(summary = "Получить информацию по блюду")
     public DishInfoDto getDishById(@ApiParam("индентификатор блюда") @PathVariable(name = "id") final Long id) {
-       DishInfoDto dish = dishService.getDishEntityById(id);
-        if (dish.getImage().getId() == null) {
-            dish.setImage(new ImageDishDto());
-        }
-        return dish;
+        return dishService.getDishEntityById(id);
     }
 
     @PostMapping("/category/dish/create")
