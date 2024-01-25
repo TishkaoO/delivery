@@ -91,7 +91,7 @@ public class MenuController {
 
     @GetMapping(value = "/{dishId}/image")
     @Operation(summary = "Получение фотографии блюда")
-    public String getImage(@PathVariable("dishId") final Long dishId) {
+    public String getImageByDishId(@PathVariable("dishId") final Long dishId) {
       return imageDishService.getImageByDishId(dishId).getUrl();
     }
 
