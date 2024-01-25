@@ -18,10 +18,10 @@ import ru.fkjob.delivery.service.ImageFileService;
 public class DishController {
     private final ImageFileService fileService;
 
-    @PostMapping(value = "/{dishId}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "/{dishId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "Загрузить изображение для блюда")
-    public ImageDishDto uploadImage(@PathVariable("dishId") final Long dishId, @RequestPart("file") final MultipartFile file) {
-        return fileService.uploadImage(dishId, file);
+    public void uploadImage(@PathVariable("dishId") final Long dishId, @RequestPart("file") final MultipartFile file) {
+         fileService.uploadImage(dishId, file);
     }
 
     @DeleteMapping(value = "/{dishId}/image")
