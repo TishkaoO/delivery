@@ -10,8 +10,10 @@ import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.service.CategoryService;
 import ru.fkjob.delivery.service.DishService;
+import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.List;
 public class MenuController {
     private final DishService dishService;
     private final CategoryService categoryService;
+    private final ImageDishServiceImpl imageDishService;
 
     @GetMapping("/dishes")
     @Operation(summary = "Список всех блюд")
@@ -84,6 +87,12 @@ public class MenuController {
     @Operation(summary = "Список всех блюд")
     public List<DishDto> getDishesByIsStock() {
         return dishService.getDishByIsStock();
+    }
+
+    @GetMapping(value = "/{dishId}/image")
+    @Operation(summary = "Получение фотографии блюда")
+    public ImageDishDto deleteImage(@PathVariable("dishId") final Long dishId) {
+      return imageDishService.getImageByDishId(dishId);
     }
 
 }

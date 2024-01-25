@@ -52,5 +52,12 @@ public class ImageDishServiceImpl implements ImageFileService {
         minioService.deleteFile(image.getUrl());
         imageRepository.delete(image);
     }
+
+    public ImageDishDto getImageByDishId(final Long dishId) {
+       return dishRepository.findById(dishId)
+                .map(DishEntity::getImage)
+                .map(imageEntity -> new ImageDishDto(imageEntity.getId(), imageEntity.getUrl()))
+                .orElseThrow(() -> new NotFoundException(String.format("Не найдено блюдо с id = %s", dishId)));
+    }
 }
 
