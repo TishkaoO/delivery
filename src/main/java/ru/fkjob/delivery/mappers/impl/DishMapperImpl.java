@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
+import ru.fkjob.delivery.entity.ImageEntity;
 import ru.fkjob.delivery.mappers.dish.DishMapper;
 import ru.fkjob.delivery.entity.DishEntity;
 
@@ -21,8 +23,12 @@ public class DishMapperImpl implements DishMapper {
                 .name(entity.getName())
                 .price(entity.getPrice())
                 .description(entity.getDescription())
-                .url(entity.getImage().getUrl())
+                .image(this.getEntityImage(entity.getImage()))
                 .build();
+    }
+
+    private ImageDishDto getEntityImage(ImageEntity entity) {
+        return new ImageDishDto(entity.getId(), entity.getUrl());
     }
 
     @Override

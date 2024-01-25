@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -35,5 +36,5 @@ public class DishInfoDto {
     private String description;
 
     @ApiModelProperty(name = "Картинка блюда")
-    private String url;
+    private ImageDishDto image;
 }
