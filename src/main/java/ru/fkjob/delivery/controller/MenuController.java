@@ -37,12 +37,16 @@ public class MenuController {
     @GetMapping("category/dish/{id}")
     @Operation(summary = "Получить информацию по блюду")
     public DishInfoDto getDishById(@ApiParam("индентификатор блюда") @PathVariable(name = "id") final Long id) {
-        return dishService.getDishEntityById(id);
+       DishInfoDto dish = dishService.getDishEntityById(id);
+        if (dish.getImage().getId() == null) {
+            dish.setImage(null);
+        }
+        return dish;
     }
 
     @PostMapping("/category/dish/create")
     @Operation(summary = "создать новое блюдо")
-    public DishInfoDto getDishById(@Valid @RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
+    public DishInfoDto saveDishById(@Valid @RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
         return dishService.save(dishInfoDto, categoryId);
     }
 
