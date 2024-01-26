@@ -3,7 +3,6 @@ package ru.fkjob.delivery.dto.dish;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-import ru.fkjob.delivery.dto.image.ImageDishDto;
 
 @Builder
 @Data
@@ -18,7 +17,4 @@ public class DishDto {
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
-    //TODO:решить с картинкой
-//    @ApiModelProperty(name = "Картинка блюда")
-//    private String url;
 }
