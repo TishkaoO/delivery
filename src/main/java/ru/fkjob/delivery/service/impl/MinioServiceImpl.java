@@ -33,7 +33,6 @@ public class MinioServiceImpl implements MinioService {
                     .bucket(bucket)
                     .object(objectName)
                     .stream(stream, file.getSize(), -1)
-                    .contentType("image/svg+xml")
                     .build());
         return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
                 .bucket(bucket)
