@@ -22,7 +22,6 @@ public class DishInfoDto {
     @ApiModelProperty(name = "Идентификатор блюда")
     private Long id;
 
-    @NotEmpty(message = "Пожалуйста укажите название")
     @ApiModelProperty(name = "Название блюда")
     private String name;
 

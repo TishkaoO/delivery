@@ -42,7 +42,7 @@ public class MenuController {
 
     @PostMapping("/category/dish/create")
     @Operation(summary = "создать новое блюдо")
-    public DishInfoDto saveDishById(@Valid @RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
+    public DishInfoDto saveDishById(@RequestBody DishInfoDto dishInfoDto, @RequestParam(name = "categoryId") final Long categoryId) {
         return dishService.save(dishInfoDto, categoryId);
     }
 
@@ -61,7 +61,7 @@ public class MenuController {
 
     @PutMapping(value = "/category/{dishId}/dish")
     @Operation(summary = "редактировать блюдо")
-    public Long updateDish(@PathVariable(name = "dishId") final Long dishId, @Valid @RequestBody final DishInfoDto dto) {
+    public Long updateDish(@PathVariable(name = "dishId") final Long dishId, @RequestBody final DishInfoDto dto) {
         return dishService.updateDish(dishId, dto);
     }
 
