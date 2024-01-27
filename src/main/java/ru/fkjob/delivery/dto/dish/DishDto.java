@@ -17,4 +17,7 @@ public class DishDto {
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
+    @ApiModelProperty(name = "Стоимость блюда")
+    private Double price;
+
 }
