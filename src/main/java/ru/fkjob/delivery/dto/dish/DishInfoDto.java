@@ -8,10 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-
 @Builder
 @Data
 @AllArgsConstructor
