@@ -25,7 +25,6 @@ public class DishInfoDto {
     @ApiModelProperty(name = "Название блюда")
     private String name;
 
-    @Min(0)
     @ApiModelProperty(name = "Стоимость блюда")
     private Double price;
 
