@@ -39,6 +39,7 @@ public class DishMapperImpl implements DishMapper {
         return DishDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .price(entity.getPrice())
                 .build();
     }
 
