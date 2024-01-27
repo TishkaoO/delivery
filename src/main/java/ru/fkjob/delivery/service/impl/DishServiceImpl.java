@@ -64,7 +64,7 @@ public class DishServiceImpl implements DishService {
                         }
                 );
         DishEntity entity = dishMapper.toEntity(dishInfoDto);
-        entity.setCategoryEntity(category);
+        entity.setCategory(category);
         DishEntity save = dishRepository.save(entity);
         return dishMapper.toDtoInfo(save);
     }

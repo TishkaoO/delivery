@@ -33,10 +33,14 @@ public class DishEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_category_id")
-    private CategoryEntity categoryEntity;
+    private CategoryEntity category;
 
     @OneToOne(mappedBy = "dish", cascade = CascadeType.ALL)
     private ImageEntity image;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_order_id")
+    private OrderEntity order;
 
     @Override
     public boolean equals(Object o) {

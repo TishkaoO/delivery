@@ -13,25 +13,24 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "category" , schema = "delivery")
-public class CategoryEntity {
+@Table(name = "orders", schema = "delivery")
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pk_category_id")
+    @Column(name = "pk_order_id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "order")
     private List<DishEntity> dishEntities = new ArrayList<>();
+
+    private Integer count;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CategoryEntity that = (CategoryEntity) o;
+        OrderEntity that = (OrderEntity) o;
         return Objects.equals(id, that.id);
     }
 

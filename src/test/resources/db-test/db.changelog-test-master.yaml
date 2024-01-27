@@ -22,7 +22,7 @@ databaseChangeLog:
             path: scripts/init/006_ddl_create_card_table.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/init/0003_create_dish_table.sql
+            path: scripts/init/0004_create_dish_table.sql
             relativeToChangelogFile: true
         - sqlFile:
             path: scripts/init/0005_create_order_dish_table.sql
@@ -34,5 +34,5 @@ databaseChangeLog:
             path: scripts/010_dml_insert_status.sql
             relativeToChangelogFile: true
         - sqlFile:
-            path: scripts/0005_insert_dish.sql
+            path: scripts/0006_insert_dish.sql
             relativeToChangelogFile: true
