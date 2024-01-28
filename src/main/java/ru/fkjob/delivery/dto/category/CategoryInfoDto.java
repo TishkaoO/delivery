@@ -14,15 +14,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "полная информация по категориям блюд")
+@ApiModel(description = "Полная информация по категориям блюд")
 public class CategoryInfoDto {
 
     @ApiModelProperty(name = "Идентификатор категории")
     private Long id;
 
-    @ApiModelProperty(name = "название категории")
+    @ApiModelProperty(name = "Название категории")
     private String name;
 
-    @ApiModelProperty(name = "список блюд относящиеся к категории")
-    private List<DishDto> dishDtos;
+    @ApiModelProperty(name = "Список блюд относящиеся к категории")
+    private List<DishDto> dish;
 }
