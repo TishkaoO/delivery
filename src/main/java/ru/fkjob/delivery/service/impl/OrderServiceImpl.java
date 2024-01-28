@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
         List<DishItemDto> cartItems = new ArrayList<>();
         dishes.stream()
                 .map(dish -> new DishItemDto(dish.getId(), dish.getCount()))
-                .forEach(dishItem -> cartItems.add(dishItem));
+                .forEach(cartItems::add);
         cart.setCartItems(cartItems);
         order.setCart(cart);
         return order;
