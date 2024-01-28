@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.fkjob.delivery.dto.cart.CartDto;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
@@ -19,7 +18,6 @@ import ru.fkjob.delivery.service.DishService;
 import ru.fkjob.delivery.service.OrderService;
 import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")

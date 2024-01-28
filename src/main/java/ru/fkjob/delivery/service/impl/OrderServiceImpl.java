@@ -26,12 +26,9 @@ public class OrderServiceImpl implements OrderService {
         order.setSuccess(true);
         CartDto cart = new CartDto();
         List<DishItemDto> cartItems = new ArrayList<>();
-        for (DishItemDto dish : dishes) {
-            DishItemDto dishItem = new DishItemDto();
-            dishItem.setId(dish.getId());
-            dishItem.setCount(dish.getCount());
-            cartItems.add(dishItem);
-        }
+        dishes.stream()
+                .map(dish -> new DishItemDto(dish.getId(), dish.getCount()))
+                .forEach(dishItem -> cartItems.add(dishItem));
         cart.setCartItems(cartItems);
         order.setCart(cart);
         return order;
