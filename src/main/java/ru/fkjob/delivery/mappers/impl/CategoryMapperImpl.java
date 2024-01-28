@@ -22,7 +22,7 @@ public class CategoryMapperImpl implements CategoryMapper {
         return CategoryInfoDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .dishDtos(dishMapper.toDto(entity.getDishEntities()))
+                .dish(dishMapper.toDto(entity.getDishEntities()))
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class CategoryMapperImpl implements CategoryMapper {
         return CategoryEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
-                .dishEntities(dishMapper.toEntity(dto.getDishDtos()))
+                .dishEntities(dishMapper.toEntity(dto.getDish()))
                 .build();
     }
 
