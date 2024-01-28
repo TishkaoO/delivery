@@ -15,8 +15,9 @@ import ru.fkjob.delivery.dto.cart.CartDto;
 @ApiModel(description = "Заказ")
 public class OrderItemDto {
 
-    @ApiModelProperty(name = "Информация что успешно добавлено")
+    @ApiModelProperty(name = "Информация, что успешно добавлено")
     private boolean success;
 
+    @ApiModelProperty(name = "Корзина")
     private CartDto cart;
 }

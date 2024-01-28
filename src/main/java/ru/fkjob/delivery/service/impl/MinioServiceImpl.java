@@ -22,7 +22,6 @@ public class MinioServiceImpl implements MinioService {
     @Value("${spring.minio.bucket}")
     private String bucket;
 
-
     @SneakyThrows
     @Override
     public String uploadFile(final MultipartFile file) {
