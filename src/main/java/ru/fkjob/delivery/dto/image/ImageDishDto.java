@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "Картинка блюда")
 public class ImageDishDto {
 
-    @ApiModelProperty(name = "идентификатор картинки")
+    @ApiModelProperty(name = "Идентификатор картинки")
     private Long id;
 
-    @ApiModelProperty(name = "адрес пути картинки")
+    @ApiModelProperty(name = "Адрес пути картинки")
     private String url;
 }

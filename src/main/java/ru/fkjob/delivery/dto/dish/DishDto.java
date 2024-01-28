@@ -20,4 +20,6 @@ public class DishDto {
     @ApiModelProperty(name = "Стоимость блюда")
     private Double price;
 
+    @ApiModelProperty(name = "Количество для заказа")
+    private Integer count;
 }

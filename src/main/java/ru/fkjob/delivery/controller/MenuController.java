@@ -6,13 +6,17 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.fkjob.delivery.dto.cart.CartDto;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
+import ru.fkjob.delivery.dto.dish.DishItemDto;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
+import ru.fkjob.delivery.dto.order.OrderItemDto;
 import ru.fkjob.delivery.service.CategoryService;
 import ru.fkjob.delivery.service.DishService;
+import ru.fkjob.delivery.service.OrderService;
 import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
 import javax.validation.Valid;
@@ -27,6 +31,7 @@ public class MenuController {
     private final DishService dishService;
     private final CategoryService categoryService;
     private final ImageDishServiceImpl imageDishService;
+    private final OrderService orderService;
 
     @GetMapping("/dishes")
     @Operation(summary = "Список всех блюд")
@@ -93,6 +98,12 @@ public class MenuController {
     @Operation(summary = "Получение фотографии блюда")
     public ImageDishDto getImage(@PathVariable("dishId") final Long dishId) {
       return imageDishService.getImageByDishId(dishId);
+    }
+
+    @PostMapping(value = "/create-order")
+    @Operation(summary = "Добавить товар в корзину")
+    public OrderItemDto createOrder(@RequestBody final List<DishItemDto> dishes) {
+        return orderService.createOrder(dishes);
     }
 
 }
