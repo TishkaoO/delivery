@@ -9,11 +9,12 @@ import ru.fkjob.delivery.mappers.user.UserMapper;
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public UserEntity toEntity(UserDto baseUser) {
+    public UserEntity toEntity(UserDto user) {
         return UserEntity.builder()
-                .username(baseUser.getUsername())
-                .password(baseUser.getPassword())
-                .roles(baseUser.getRoles())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .roles(user.getRoles())
                 .build();
     }
 }

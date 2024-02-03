@@ -14,6 +14,9 @@ public class UserDto {
     @ApiModelProperty("Пароль")
     private String password;
 
+    @ApiModelProperty("Электронная почта")
+    private String email;
+
     @ApiModelProperty("Роли")
     private String roles;
 }

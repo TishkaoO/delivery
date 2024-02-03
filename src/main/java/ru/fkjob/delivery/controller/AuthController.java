@@ -26,9 +26,10 @@ public class AuthController {
     @ApiOperation("Авторизация пользователя")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody AuthRequestDto request) {
-        if (authService.login(request.getUsername(), request.getPassword()))
+        if (authService.login(request.getUsername(), request.getPassword())) {
             return ResponseEntity.ok(jwtProvider.generateToken(request.getUsername()));
-        else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @ApiOperation("Выход из системы")

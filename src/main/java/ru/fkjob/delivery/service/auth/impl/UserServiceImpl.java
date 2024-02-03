@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService, AuthService {
                     .findByUsername(request.getUsername())
                     .map(user -> {
                         user.setRoles(request.getRoles());
+                        user.setEmail(request.getEmail());
                         Optional.ofNullable(request.getPassword())
                             .ifPresent(p -> user.setPassword(passwordEncoder.encode(p)));
                         return userRepository.save(user).getId();

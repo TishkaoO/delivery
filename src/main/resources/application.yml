@@ -17,9 +17,17 @@ spring:
       max-request-size: 450MB
   minio:
     endpoint: ${DELIVERY_MINIO_URL:http://localhost:9000}
-    accessKey: ${DELIVERY_MINIO_URL:minioadmin}
-    secretKey: ${DELIVERY_MINIO_URL:minioadmin}
+    accessKey: ${DELIVERY_MINIO_UNAME:minioadmin}
+    secretKey: ${DELIVERY_MINIO_PASS:minioadmin}
     bucket: ${DELIVERY_MINIO_BUCKET:delivery}
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${DELIVERY_MAIL_UNAME:testsend688@gmail.com}
+    password: ${DELIVERY_MINIO_PASS:jghzpcsshjrrtucp}
+    properties:
+      debug: true
+
 server:
   error:
     include-message: always
