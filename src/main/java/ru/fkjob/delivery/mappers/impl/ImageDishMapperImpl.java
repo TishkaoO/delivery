@@ -2,7 +2,7 @@ package ru.fkjob.delivery.mappers.impl;
 
 import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
-import ru.fkjob.delivery.entity.ImageEntity;
+import ru.fkjob.delivery.domain.ImageEntity;
 import ru.fkjob.delivery.mappers.image.ImageDishMapper;
 
 @Component

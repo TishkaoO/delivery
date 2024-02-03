@@ -1,4 +1,4 @@
-package ru.fkjob.delivery.entity;
+package ru.fkjob.delivery.domain;
 
 import lombok.*;
 

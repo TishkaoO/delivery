@@ -1,9 +1,8 @@
-package ru.fkjob.delivery.entity;
+package ru.fkjob.delivery.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,9 +21,7 @@ public class OrderEntity {
     private Long id;
 
     @OneToMany(mappedBy = "order")
-    private List<DishEntity> dishEntities = new ArrayList<>();
-
-    private Integer count;
+    private List<DishEntity> dishEntities;
 
     @Override
     public boolean equals(Object o) {

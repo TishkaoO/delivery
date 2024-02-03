@@ -6,17 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.fkjob.delivery.dto.dish.DishItemDto;
+
+import java.util.List;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "Корзина")
-public class CartDto {
+public class CartItemDto {
 
-    @ApiModelProperty(name = "Информация, что успешно добавлено")
-    private boolean success;
-
-    @ApiModelProperty(name = "Товар в корзине")
-    private CartItemDto cart;
+    @ApiModelProperty(name = "Информация количеству добавленных товаров")
+    private List<DishItemDto> cartItems;
 }

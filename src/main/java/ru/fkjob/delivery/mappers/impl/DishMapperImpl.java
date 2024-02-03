@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
-import ru.fkjob.delivery.entity.ImageEntity;
+import ru.fkjob.delivery.domain.ImageEntity;
 import ru.fkjob.delivery.mappers.dish.DishMapper;
-import ru.fkjob.delivery.entity.DishEntity;
+import ru.fkjob.delivery.domain.DishEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;

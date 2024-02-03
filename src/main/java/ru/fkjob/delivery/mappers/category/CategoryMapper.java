@@ -1,10 +1,9 @@
 package ru.fkjob.delivery.mappers.category;
 
-import org.mapstruct.Mapper;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
-import ru.fkjob.delivery.entity.CategoryEntity;
+import ru.fkjob.delivery.domain.CategoryEntity;
 
 import java.util.List;
 

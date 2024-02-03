@@ -1,8 +1,8 @@
 package ru.fkjob.delivery.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.fkjob.delivery.entity.DishEntity;
-import ru.fkjob.delivery.entity.ImageEntity;
+import ru.fkjob.delivery.domain.DishEntity;
+import ru.fkjob.delivery.domain.ImageEntity;
 
 import java.util.Optional;
 

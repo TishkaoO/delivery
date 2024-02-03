@@ -1,4 +1,4 @@
-package ru.fkjob.delivery.entity;
+package ru.fkjob.delivery.domain;
 
 import lombok.*;
 
@@ -22,7 +22,6 @@ public class DishEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column
     private String description;
 
     @Column(nullable = false)
@@ -41,6 +40,10 @@ public class DishEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_order_id")
     private OrderEntity order;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_cart_id")
+    private CartEntity cart;
 
     @Override
     public boolean equals(Object o) {

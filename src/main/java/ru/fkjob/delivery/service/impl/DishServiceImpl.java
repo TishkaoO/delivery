@@ -8,8 +8,8 @@ import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.service.DishService;
-import ru.fkjob.delivery.entity.CategoryEntity;
-import ru.fkjob.delivery.entity.DishEntity;
+import ru.fkjob.delivery.domain.CategoryEntity;
+import ru.fkjob.delivery.domain.DishEntity;
 import ru.fkjob.delivery.repository.CategoryRepository;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.mappers.dish.DishMapper;
@@ -31,7 +31,7 @@ public class DishServiceImpl implements DishService {
                 .orElseThrow(() -> {
                             NotFoundException notFoundException = new NotFoundException(
                                     String.format("Не найдено блюдо с id = %s", id));
-                            log.warn("getDishEntityById: ", notFoundException);
+                            log.warn("getDishEntityById: {}", notFoundException.getMessage());
                             return notFoundException;
                         }
                 );
@@ -59,7 +59,7 @@ public class DishServiceImpl implements DishService {
                 .orElseThrow(() -> {
                             NotFoundException notFoundException = new NotFoundException(
                                     String.format("Не найдена категория с id = %s", categoryId));
-                            log.warn("getDishEntityById: ", notFoundException);
+                            log.warn("getDishEntityById: {}", notFoundException.getMessage());
                             return notFoundException;
                         }
                 );
@@ -75,7 +75,7 @@ public class DishServiceImpl implements DishService {
                 .orElseThrow(() -> {
                             NotFoundException notFoundException = new NotFoundException(
                                     String.format("Не найдено блюдо с id = %s", id));
-                            log.debug("getDishEntityById: ", notFoundException);
+                            log.debug("getDishEntityById: {}", notFoundException.getMessage());
                             return notFoundException;
                         }
                 );
@@ -88,7 +88,7 @@ public class DishServiceImpl implements DishService {
                 .orElseThrow(() -> {
                             NotFoundException notFoundException = new NotFoundException(
                                     String.format("Не найдено блюдо с id = %s", dishId));
-                            log.debug("getDishEntityById: ", notFoundException);
+                            log.debug("getDishEntityById: {}", notFoundException.getMessage());
                             return notFoundException;
                         }
                 );

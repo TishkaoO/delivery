@@ -1,9 +1,8 @@
-package ru.fkjob.delivery.entity;
+package ru.fkjob.delivery.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,7 +24,7 @@ public class CategoryEntity {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<DishEntity> dishEntities = new ArrayList<>();
+    private List<DishEntity> dishes;
 
     @Override
     public boolean equals(Object o) {

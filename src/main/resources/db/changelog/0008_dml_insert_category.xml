@@ -4,14 +4,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
 
 
-<changeSet id="0004_ddl_create_dish_table" author="K.Kirill">
+    <changeSet id="0008_dml_insert_category" author="K.Kirill">
         <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists schemaName="delivery" tableName="dish"/>
-            </not>
+            <tableExists schemaName="delivery" tableName="category"/>
         </preConditions>
         <sqlFile dbms="postgresql"
-                 path="db/changelog/sql/0004_create_dish_table.sql"/>
+                 splitStatements="false"
+                 path="sql/0008_insert_category.sql"
+                 relativeToChangelogFile="true"/>
     </changeSet>
 
 </databaseChangeLog>

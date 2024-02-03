@@ -7,7 +7,7 @@ import ru.fkjob.delivery.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.mappers.category.CategoryMapper;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.service.CategoryService;
-import ru.fkjob.delivery.entity.CategoryEntity;
+import ru.fkjob.delivery.domain.CategoryEntity;
 import ru.fkjob.delivery.repository.CategoryRepository;
 
 import java.util.List;

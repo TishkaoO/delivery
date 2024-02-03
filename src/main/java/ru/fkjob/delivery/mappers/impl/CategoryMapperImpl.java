@@ -7,7 +7,7 @@ import ru.fkjob.delivery.dto.category.CategoryInfoDto;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.mappers.category.CategoryMapper;
 import ru.fkjob.delivery.mappers.dish.DishMapper;
-import ru.fkjob.delivery.entity.CategoryEntity;
+import ru.fkjob.delivery.domain.CategoryEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class CategoryMapperImpl implements CategoryMapper {
         return CategoryInfoDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
-                .dish(dishMapper.toDto(entity.getDishEntities()))
+                .dish(dishMapper.toDto(entity.getDishes()))
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class CategoryMapperImpl implements CategoryMapper {
         return CategoryEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
-                .dishEntities(dishMapper.toEntity(dto.getDish()))
+                .dishes(dishMapper.toEntity(dto.getDish()))
                 .build();
     }
 
