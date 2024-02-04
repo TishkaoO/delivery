@@ -11,10 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 import ru.fkjob.delivery.config.jwt.JwtConfig;
 import ru.fkjob.delivery.config.jwt.JwtProvider;
 
 import java.security.SecureRandom;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -50,6 +52,11 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .httpBasic().disable()
+                .cors(c -> c.configurationSource(request -> {
+                    CorsConfiguration cors = new CorsConfiguration();
+                    cors.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                    return cors;
+                }))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
