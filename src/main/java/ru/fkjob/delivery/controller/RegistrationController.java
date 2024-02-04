@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.fkjob.delivery.dto.baseuser.UserDto;
 import ru.fkjob.delivery.service.auth.UserService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/registration")
 @Api(tags = "Регистрация")

@@ -16,6 +16,8 @@ import ru.fkjob.delivery.config.jwt.JwtProvider;
 
 import java.security.SecureRandom;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalAuthentication
@@ -50,7 +52,7 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .httpBasic().disable()
-                .cors().disable()
+                .cors(withDefaults())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
