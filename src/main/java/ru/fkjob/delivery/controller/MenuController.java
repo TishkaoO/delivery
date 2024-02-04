@@ -38,7 +38,7 @@ public class MenuController {
         return dishService.getDishList();
     }
 
-    @GetMapping("category/dish/{id}")
+    @GetMapping("/category/dish/{id}")
     @Operation(summary = "Получить информацию по блюду")
     public DishInfoDto getDishById(@ApiParam("индентификатор блюда") @PathVariable(name = "id") final Long id) {
         return dishService.getDishEntityById(id);

@@ -39,7 +39,15 @@ public class WebSecurityConfig {
 
     private final String[] PUBLIC_RESOURCES = {
             "/auth/login",
-            "/registration/create"
+            "/registration/create",
+            "/registration/create",
+            "/menu-info/dishes",
+            "/menu-info/category/dish/{id}",
+            "/menu-info/category/dish",
+            "/menu-info/category",
+            "/menu-info/category/{id}",
+            "/menu-info/categoryes-dish",
+            "/menu-info/{dishId}/image",
     };
 
     @Bean
