@@ -21,7 +21,6 @@ import ru.fkjob.delivery.service.impl.ImageDishServiceImpl;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/menu-info")
 @Api(tags = "меню с информацией по блюдам")

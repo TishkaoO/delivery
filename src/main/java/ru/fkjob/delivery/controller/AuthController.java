@@ -14,7 +14,6 @@ import ru.fkjob.delivery.service.auth.AuthService;
 
 import java.security.Principal;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/auth")
 @Api(tags = "Авторизация")
