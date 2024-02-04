@@ -50,7 +50,6 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .httpBasic().disable()
-                .cors().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
