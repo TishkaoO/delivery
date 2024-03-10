@@ -18,5 +18,5 @@ import java.util.List;
 public class CartItemDto {
 
     @ApiModelProperty(name = "Информация количеству добавленных товаров")
-    private List<DishItemDto> cartItems;
+    private List<DishItemDto> dishItems;
 }

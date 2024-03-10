@@ -1,5 +1,6 @@
 package ru.fkjob.delivery.mappers.dish;
 
+import org.mapstruct.Mapper;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
 import ru.fkjob.delivery.domain.DishEntity;

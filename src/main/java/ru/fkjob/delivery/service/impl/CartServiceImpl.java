@@ -1,42 +1,107 @@
 package ru.fkjob.delivery.service.impl;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import ru.fkjob.delivery.domain.CartEntity;
+import ru.fkjob.delivery.domain.DishEntity;
+import ru.fkjob.delivery.domain.UserEntity;
 import ru.fkjob.delivery.dto.cart.CartDto;
+import ru.fkjob.delivery.dto.cart.CartItemDishDto;
 import ru.fkjob.delivery.dto.cart.CartItemDto;
 import ru.fkjob.delivery.dto.cart.CartDishInfoDto;
 import ru.fkjob.delivery.dto.dish.DishItemDto;
+import ru.fkjob.delivery.dto.image.ImageDishDto;
+import ru.fkjob.delivery.exception.NotFoundException;
+import ru.fkjob.delivery.repository.CartRepository;
+import ru.fkjob.delivery.repository.DishRepository;
+import ru.fkjob.delivery.repository.UserRepository;
 import ru.fkjob.delivery.service.CartService;
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
+    private final CartRepository cartRepository;
+    private final DishRepository dishRepository;
+    private final UserRepository userRepository;
 
+    @Transactional
     @Override
-    public CartDto createCart(List<DishItemDto> dishes) {
-        CartDto cart = new CartDto();
+    public CartDto createCart(Long userId, List<DishItemDto> dishes) {
+        CartDto cartDto = new CartDto();
         if (dishes == null || dishes.isEmpty()) {
-            cart.setSuccess(false);
-            return cart;
+            cartDto.setSuccess(false);
+            return cartDto;
         }
-        cart.setSuccess(true);
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)));
+        CartEntity cartEntity = cartRepository.findByUserId(user.getId())
+                .orElseGet(() -> {
+                    CartEntity newCart = new CartEntity();
+                    newCart.setUser(user);
+                    return newCart;
+                });
+        cartEntity.getDishes().clear();
+        dishes.forEach(dishItem -> {
+            DishEntity dish = dishRepository.findById(dishItem.getId())
+                    .orElseThrow(() -> new NotFoundException(String.format("Dish not found with id: %s", dishItem.getId())));
+            IntStream.range(0, dishItem.getCount()).forEach(i -> cartEntity.getDishes().add(dish));
+        });
+        cartRepository.save(cartEntity);
+        cartDto.setSuccess(true);
+        cartDto.setId(cartEntity.getId());
         CartItemDto cartItem = new CartItemDto();
-        List<DishItemDto> cartItems = new ArrayList<>();
-        dishes.stream()
-                .map(dish -> new DishItemDto(dish.getId(), dish.getCount()))
-                .forEach(cartItems::add);
-        cartItem.setCartItems(cartItems);
-        cart.setCart(cartItem);
-        return cart;
+        List<DishItemDto> dishItems = cartEntity.getDishes().stream()
+                .collect(Collectors.groupingBy(DishEntity::getId, Collectors.summingInt(d -> 1)))
+                .entrySet().stream()
+                .map(entry -> new DishItemDto(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+        cartItem.setDishItems(dishItems);
+        cartDto.setCart(cartItem);
+        return cartDto;
     }
 
     @Override
-    public List<CartDishInfoDto> getCartInfos() {
-        return null;
+    public List<CartDishInfoDto> getSummary(Long userId, Long cartId) {
+        CartEntity cartEntity = cartId == null ? userRepository.findById(userId)
+                        .map(user -> cartRepository.findByUserId(user.getId())
+                                .orElseGet(() -> {
+                                    CartEntity newCart = new CartEntity();
+                                    newCart.setUser(user);
+                                    return newCart;
+                                })).orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)))
+                : cartRepository.findById(cartId).orElseThrow(() -> new NotFoundException(String.format("Cart not found with id: %s", cartId)));
+        List<CartItemDishDto> items = cartEntity.getDishes().stream()
+                .distinct()
+                .map(dishEntity -> CartItemDishDto.builder()
+                        .dishId(dishEntity.getId())
+                        .name(dishEntity.getName())
+                        .price(dishEntity.getPrice())
+                        .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId()))
+                        .imageDish(ImageDishDto.builder()
+                                .id(dishEntity.getImage() != null ? dishEntity.getImage().getId() : null)
+                                .url(dishEntity.getImage() != null ? dishEntity.getImage().getUrl() : null)
+                                .build())
+                        .build())
+                .collect(Collectors.toList());
+        int quantity = 0;
+        double totalPrice = 0;
+        for(CartItemDishDto item : items) {
+            quantity += item.getQuantity();
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        CartDishInfoDto cartInfo = CartDishInfoDto.builder()
+                .items(items)
+                .totalPrice(totalPrice)
+                .totalQuantity(quantity)
+                .build();
+        return Collections.singletonList(cartInfo);
     }
-
 }

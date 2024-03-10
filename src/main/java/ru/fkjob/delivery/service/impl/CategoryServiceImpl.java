@@ -11,6 +11,7 @@ import ru.fkjob.delivery.domain.CategoryEntity;
 import ru.fkjob.delivery.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,15 +27,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryInfoDto getCategoryById(final Long id) {
-       CategoryEntity category = categoryRepository.findById(id)
+       return categoryRepository.findById(id)
+               .map(categoryMapper::toDtoInfo)
                .orElseThrow(() -> new NotFoundException(
                        String.format("Не найдена категория с id = %s", id)));
-        return categoryMapper.toDtoInfo(category);
     }
 
     @Override
     public List<CategoryInfoDto> getAllCategoryDishes() {
-        List<CategoryEntity> category = categoryRepository.findAll();
-        return categoryMapper.toDtoInfo(category);
+       return categoryRepository.findAll().stream()
+               .map(categoryMapper::toDtoInfo)
+               .collect(Collectors.toList());
     }
 }

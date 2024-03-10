@@ -27,7 +27,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public DishInfoDto getDishEntityById(final Long id) {
         return dishRepository.findById(id)
-                .map(entity -> dishMapper.toDtoInfo(entity))
+                .map(dishMapper::toDtoInfo)
                 .orElseThrow(() -> {
                             NotFoundException notFoundException = new NotFoundException(
                                     String.format("Не найдено блюдо с id = %s", id));

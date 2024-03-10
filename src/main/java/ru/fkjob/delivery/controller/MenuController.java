@@ -24,7 +24,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/menu-info")
-@Api(tags = "меню с информацией по блюдам")
+@Api(tags = "Меню с информацией по блюдам")
 @RequiredArgsConstructor
 public class MenuController {
     private final DishService dishService;
@@ -99,17 +99,17 @@ public class MenuController {
       return imageDishService.getImageByDishId(dishId);
     }
 
-    @PostMapping(value = "/create-order")
+    @PostMapping(value = "/{userId}/create-order")
     @Operation(summary = "Добавить товар в корзину")
-    public CartDto createOrder(@RequestBody final List<DishItemDto> dishes) {
-        return cartService.createCart(dishes);
+    public CartDto createOrder(@PathVariable("userId") Long userId, @RequestBody final List<DishItemDto> dishes) {
+        return cartService.createCart(userId, dishes);
     }
 
 
-    @GetMapping(value = "/summary")
+    @GetMapping(value = "/{userId}/summary/{cartId}")
     @Operation(summary = "Получить информацию корзины")
-    public List<CartDishInfoDto> getSummary() {
-        return cartService.getCartInfos();
+    public List<CartDishInfoDto> getSummary(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId) {
+        return cartService.getSummary(userId, cartId);
     }
 
 }

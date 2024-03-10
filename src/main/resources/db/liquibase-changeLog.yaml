@@ -17,4 +17,6 @@ databaseChangeLog:
       file: db/changelog/0008_dml_insert_category.xml
   - include:
       file: db/changelog/0009_dml_insert_dish.xml
+  - include:
+      file: db/changelog/0010_ddl_create_cart_dish.xml
 

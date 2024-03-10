@@ -46,7 +46,7 @@ public class DishMapperImpl implements DishMapper {
     @Override
     public List<DishDto> toDto(List<DishEntity> entity) {
         return entity.stream()
-                .map(dishEntity -> toDto(dishEntity))
+                .map(this::toDto)
                 .collect(Collectors.toList());
     }
 

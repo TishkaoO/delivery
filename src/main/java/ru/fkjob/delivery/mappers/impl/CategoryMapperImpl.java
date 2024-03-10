@@ -40,28 +40,4 @@ public class CategoryMapperImpl implements CategoryMapper {
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public CategoryEntity toEntity(DishDto dto) {
-        return CategoryEntity.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .build();
-    }
-
-    @Override
-    public CategoryEntity toEntity(CategoryInfoDto dto) {
-        return CategoryEntity.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .dishes(dishMapper.toEntity(dto.getDish()))
-                .build();
-    }
-
-    @Override
-    public List<CategoryInfoDto> toDtoInfo(List<CategoryEntity> entity) {
-        return entity.stream()
-                .map(this::toDtoInfo)
-                .collect(Collectors.toList());
-    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface CartService {
 
-    CartDto createCart(List<DishItemDto> dishes);
-
-    List<CartDishInfoDto> getCartInfos();
+    CartDto createCart(Long userId, List<DishItemDto> dish);
+    List<CartDishInfoDto> getSummary(Long userId, Long cartId);
 }

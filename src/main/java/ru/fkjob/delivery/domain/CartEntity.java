@@ -3,7 +3,9 @@ package ru.fkjob.delivery.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -23,7 +25,13 @@ public class CartEntity {
     @JoinColumn(name = "fk_user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "cart")
-    private List<DishEntity> dishes;
-
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            schema = "delivery",
+            name = "cart_dish",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
+    )
+    private List<DishEntity> dishes = new ArrayList<>();
 }

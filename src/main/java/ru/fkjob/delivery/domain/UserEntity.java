@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class UserEntity {
     private String roles;
 
     @OneToMany(mappedBy="user")
-    private Set<CartEntity> carts;
+    private List<CartEntity> carts;
 
     @Override
     public final boolean equals(Object o) {

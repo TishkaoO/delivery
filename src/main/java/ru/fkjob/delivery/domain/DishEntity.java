@@ -3,7 +3,10 @@ package ru.fkjob.delivery.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -41,9 +44,9 @@ public class DishEntity {
     @JoinColumn(name = "fk_order_id")
     private OrderEntity order;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_cart_id")
-    private CartEntity cart;
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "dishes")
+    private List<CartEntity> carts = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

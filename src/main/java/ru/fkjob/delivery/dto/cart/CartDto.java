@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "Корзина")
 public class CartDto {
 
+    @ApiModelProperty(name = "Идентификатор корзины")
+    private Long id;
+
     @ApiModelProperty(name = "Информация, что успешно добавлено")
     private boolean success;
 
