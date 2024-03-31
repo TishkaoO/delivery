@@ -99,7 +99,7 @@ public class MenuController {
       return imageDishService.getImageByDishId(dishId);
     }
 
-    @PostMapping(value = "/{userId}/create-order")
+    @PostMapping(value = "/create-order")
     @Operation(summary = "Добавить товар в корзину")
     public CartDto createOrder(@RequestBody final List<DishItemDto> dishes) {
         return cartService.createCart(dishes);
