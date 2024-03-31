@@ -16,6 +16,7 @@ import ru.fkjob.delivery.dto.cart.CartDishInfoDto;
 import ru.fkjob.delivery.dto.dish.DishItemDto;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.exception.NotFoundException;
+import ru.fkjob.delivery.exception.UnauthorizedUserException;
 import ru.fkjob.delivery.repository.CartRepository;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.repository.UserRepository;
@@ -83,9 +84,9 @@ public class CartServiceImpl implements CartService {
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             return userRepository.findByUsername(userDetails.getUsername())
-                    .orElseThrow(() -> new NotFoundException("Пользователь не найден")).getId();
+                    .orElseThrow(() -> new NotFoundException(String.format("Пользователь не найден: %s", userDetails.getUsername()))).getId();
         }
-        throw new NotFoundException("Пользователь не авторизован");
+        throw new UnauthorizedUserException("Пользователь не авторизован");
     }
 
     private CartEntity getCartEntity(Long userId) {

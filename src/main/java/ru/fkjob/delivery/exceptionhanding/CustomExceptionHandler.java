@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.fkjob.delivery.exception.NotFoundException;
+import ru.fkjob.delivery.exception.UnauthorizedUserException;
 import ru.fkjob.delivery.exceptionhanding.customexception.BadRequestException;
 import ru.fkjob.delivery.exceptionhanding.customexception.ExceptionMessage;
 import ru.fkjob.delivery.exceptionhanding.customexception.NotValidExceptionMessage;
@@ -115,6 +116,20 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<Object> handleApiBadRequestException(BadRequestException e, HttpServletRequest request) {
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        ExceptionMessage exceptionMessage = ExceptionMessage.builder()
+                .timestamp(LocalDateTime.now())
+                .status(httpStatus.value())
+                .error(httpStatus.getReasonPhrase())
+                .message(e.getMessage())
+                .path(request.getContextPath())
+                .build();
+        return new ResponseEntity<>(exceptionMessage, httpStatus);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnauthorizedUserException.class)
+    public ResponseEntity<Object> handleApiBadRequestException(UnauthorizedUserException e, HttpServletRequest request) {
+        HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
         ExceptionMessage exceptionMessage = ExceptionMessage.builder()
                 .timestamp(LocalDateTime.now())
                 .status(httpStatus.value())
