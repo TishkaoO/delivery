@@ -70,9 +70,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartDishInfoDto> getSummary(Long cartId) {
+    public List<CartDishInfoDto> getSummary() {
         Long userId = getUserIdIfAuthentication();
-        CartEntity cartEntity = getCartEntity(userId, cartId);
+        CartEntity cartEntity = getCartEntity(userId);
         List<CartItemDishDto> items = createCart(cartEntity);
         CartDishInfoDto cartInfo = calculateCartInfo(items);
         return Collections.singletonList(cartInfo);
@@ -88,15 +88,14 @@ public class CartServiceImpl implements CartService {
         throw new NotFoundException("Пользователь не авторизован");
     }
 
-    private CartEntity getCartEntity(Long userId, Long cartId) {
-        return cartId == null ? userRepository.findById(userId)
-                .map(user -> cartRepository.findByUserId(user.getId())
-                        .orElseGet(() -> {
-                            CartEntity newCart = new CartEntity();
-                            newCart.setUser(user);
-                            return newCart;
-                        })).orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)))
-                : cartRepository.findById(cartId).orElseThrow(() -> new NotFoundException(String.format("Cart not found with id: %s", cartId)));
+    private CartEntity getCartEntity(Long userId) {
+        return cartRepository.findByUserId(userId)
+                .orElseGet(() -> {
+                    CartEntity newCart = new CartEntity();
+                    newCart.setUser(userRepository.findById(userId)
+                            .orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId))));
+                    return newCart;
+                });
     }
 
     private List<CartItemDishDto> createCart(CartEntity cartEntity) {

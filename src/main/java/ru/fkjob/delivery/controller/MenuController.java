@@ -105,11 +105,10 @@ public class MenuController {
         return cartService.createCart(dishes);
     }
 
-
-    @GetMapping(value = "/summary/{cartId}")
+    @GetMapping(value = "/summary")
     @Operation(summary = "Получить информацию корзины")
-    public List<CartDishInfoDto> getSummary(@PathVariable("cartId") Long cartId) {
-        return cartService.getSummary(cartId);
+    public List<CartDishInfoDto> getSummary() {
+        return cartService.getSummary();
     }
 
 }
