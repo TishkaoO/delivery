@@ -1,11 +1,11 @@
 package ru.fkjob.delivery.service.impl;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import ru.fkjob.delivery.domain.CartEntity;
 import ru.fkjob.delivery.domain.DishEntity;
 import ru.fkjob.delivery.domain.UserEntity;
@@ -34,7 +34,8 @@ public class CartServiceImpl implements CartService {
 
     @Transactional
     @Override
-    public CartDto createCart(Long userId, List<DishItemDto> dishes) {
+    public CartDto createCart(List<DishItemDto> dishes) {
+        Long userId = getUserIdIfAuthentication();
         CartDto cartDto = new CartDto();
         if (dishes == null || dishes.isEmpty()) {
             cartDto.setSuccess(false);
@@ -69,16 +70,37 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartDishInfoDto> getSummary(Long userId, Long cartId) {
-        CartEntity cartEntity = cartId == null ? userRepository.findById(userId)
-                        .map(user -> cartRepository.findByUserId(user.getId())
-                                .orElseGet(() -> {
-                                    CartEntity newCart = new CartEntity();
-                                    newCart.setUser(user);
-                                    return newCart;
-                                })).orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)))
+    public List<CartDishInfoDto> getSummary(Long cartId) {
+        Long userId = getUserIdIfAuthentication();
+        CartEntity cartEntity = getCartEntity(userId, cartId);
+        List<CartItemDishDto> items = createCart(cartEntity);
+        CartDishInfoDto cartInfo = calculateCartInfo(items);
+        return Collections.singletonList(cartInfo);
+    }
+
+    private Long getUserIdIfAuthentication() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userRepository.findByUsername(userDetails.getUsername())
+                    .orElseThrow(() -> new NotFoundException("Пользователь не найден")).getId();
+        }
+        throw new NotFoundException("Пользователь не авторизован");
+    }
+
+    private CartEntity getCartEntity(Long userId, Long cartId) {
+        return cartId == null ? userRepository.findById(userId)
+                .map(user -> cartRepository.findByUserId(user.getId())
+                        .orElseGet(() -> {
+                            CartEntity newCart = new CartEntity();
+                            newCart.setUser(user);
+                            return newCart;
+                        })).orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)))
                 : cartRepository.findById(cartId).orElseThrow(() -> new NotFoundException(String.format("Cart not found with id: %s", cartId)));
-        List<CartItemDishDto> items = cartEntity.getDishes().stream()
+    }
+
+    private List<CartItemDishDto> createCart(CartEntity cartEntity) {
+        return cartEntity.getDishes().stream()
                 .distinct()
                 .map(dishEntity -> CartItemDishDto.builder()
                         .dishId(dishEntity.getId())
@@ -91,17 +113,19 @@ public class CartServiceImpl implements CartService {
                                 .build())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    private CartDishInfoDto calculateCartInfo(List<CartItemDishDto> items) {
         int quantity = 0;
         double totalPrice = 0;
-        for(CartItemDishDto item : items) {
+        for (CartItemDishDto item : items) {
             quantity += item.getQuantity();
             totalPrice += item.getPrice() * item.getQuantity();
         }
-        CartDishInfoDto cartInfo = CartDishInfoDto.builder()
+        return CartDishInfoDto.builder()
                 .items(items)
                 .totalPrice(totalPrice)
                 .totalQuantity(quantity)
                 .build();
-        return Collections.singletonList(cartInfo);
     }
 }

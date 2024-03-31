@@ -101,15 +101,15 @@ public class MenuController {
 
     @PostMapping(value = "/{userId}/create-order")
     @Operation(summary = "Добавить товар в корзину")
-    public CartDto createOrder(@PathVariable("userId") Long userId, @RequestBody final List<DishItemDto> dishes) {
-        return cartService.createCart(userId, dishes);
+    public CartDto createOrder(@RequestBody final List<DishItemDto> dishes) {
+        return cartService.createCart(dishes);
     }
 
 
     @GetMapping(value = "/{userId}/summary/{cartId}")
     @Operation(summary = "Получить информацию корзины")
-    public List<CartDishInfoDto> getSummary(@PathVariable("userId") Long userId, @PathVariable("cartId") Long cartId) {
-        return cartService.getSummary(userId, cartId);
+    public List<CartDishInfoDto> getSummary(@PathVariable("cartId") Long cartId) {
+        return cartService.getSummary(cartId);
     }
 
 }
