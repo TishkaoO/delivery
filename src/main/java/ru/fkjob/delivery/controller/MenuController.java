@@ -101,7 +101,7 @@ public class MenuController {
 
     @PostMapping(value = "/create-order")
     @Operation(summary = "Добавить товар в корзину")
-    public CartDto createOrder(@RequestBody final List<DishItemDto> dishes) {
+    public CartDto createOrder(@RequestBody List<DishItemDto> dishes) {
         return cartService.createCart(dishes);
     }
 
