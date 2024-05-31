@@ -106,10 +106,11 @@ public class CartServiceImpl implements CartService {
                         .dishId(dishEntity.getId())
                         .name(dishEntity.getName())
                         .price(dishEntity.getPrice())
-                        .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId()))
+                        // Используйте новый метод для получения количества товаров для конкретного блюда и пользователя
+                        .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId(), cartEntity.getId()))
                         .imageDish(ImageDishDto.builder()
-                                .id(dishEntity.getImage() != null ? dishEntity.getImage().getId() : null)
-                                .url(dishEntity.getImage() != null ? dishEntity.getImage().getUrl() : null)
+                                .id(dishEntity.getImage()!= null? dishEntity.getImage().getId() : null)
+                                .url(dishEntity.getImage()!= null? dishEntity.getImage().getUrl() : null)
                                 .build())
                         .build())
                 .collect(Collectors.toList());

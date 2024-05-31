@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface CartRepository extends JpaRepository<CartEntity, Long> {
     Optional<CartEntity> findByUserId(Long userId);
 
-    @Query(value = "select count(dish_id) from delivery.cart_dish where dish_id = :dishId", nativeQuery = true)
-    Integer findCountDishFromCartByDishId(@Param("dishId") Long dishId);
+    @Query(value = "select count(dish_id) from delivery.cart_dish join " +
+            "delivery.cart on pk_cart_id = cart_id where dish_id = :dishId and cart_id = :cartId", nativeQuery = true)
+    Integer findCountDishFromCartByDishId(@Param("dishId") Long dishId, @Param("cartId") Long cartId);
+
 }
