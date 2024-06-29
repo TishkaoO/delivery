@@ -2,7 +2,6 @@ package ru.fkjob.delivery.event;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import ru.fkjob.delivery.domain.UserEntity;
 import ru.fkjob.delivery.dto.baseuser.UserDto;
 import ru.fkjob.delivery.service.MessageSender;
 

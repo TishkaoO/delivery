@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.fkjob.delivery.dto.category.CategoryDto;
 import ru.fkjob.delivery.dto.category.CategoryInfoDto;
-import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.mappers.category.CategoryMapper;
 import ru.fkjob.delivery.mappers.dish.DishMapper;
 import ru.fkjob.delivery.domain.CategoryEntity;

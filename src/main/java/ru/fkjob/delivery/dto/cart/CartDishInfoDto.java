@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.fkjob.delivery.dto.dish.DishInfoDto;
-import ru.fkjob.delivery.dto.dish.DishItemDto;
-import ru.fkjob.delivery.dto.image.ImageDishDto;
 
 import java.util.List;
 
