@@ -42,32 +42,49 @@ public class CartServiceImpl implements CartService {
             cartDto.setSuccess(false);
             return cartDto;
         }
+        CartEntity cartEntity = getCartEntity(dishes, userId);
+        cartRepository.save(cartEntity);
+        cartDto.setSuccess(true);
+        cartDto.setId(cartEntity.getId());
+        CartItemDto cartItem = new CartItemDto();
+        List<DishItemDto> dishItems = getDishItemDtos(cartEntity);
+        cartItem.setDishItems(dishItems);
+        cartDto.setCart(cartItem);
+        return cartDto;
+    }
+
+
+    private static List<DishItemDto> getDishItemDtos(CartEntity cartEntity) {
+        return cartEntity.getDishes().stream()
+                .collect(Collectors.groupingBy(DishEntity::getId, Collectors.summingInt(d -> 1)))
+                .entrySet().stream()
+                .map(entry -> new DishItemDto(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+
+    private CartEntity getCartEntity(List<DishItemDto> dishes, Long userId) {
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException(String.format("User not found with id: %s", userId)));
-        CartEntity cartEntity = cartRepository.findByUserId(user.getId())
-                .orElseGet(() -> {
-                    CartEntity newCart = new CartEntity();
-                    newCart.setUser(user);
-                    return newCart;
-                });
+        CartEntity cartEntity = getCartEntity(user);
         cartEntity.getDishes().clear();
         dishes.forEach(dishItem -> {
             DishEntity dish = dishRepository.findById(dishItem.getId())
                     .orElseThrow(() -> new NotFoundException(String.format("Dish not found with id: %s", dishItem.getId())));
             IntStream.range(0, dishItem.getCount()).forEach(i -> cartEntity.getDishes().add(dish));
         });
-        cartRepository.save(cartEntity);
-        cartDto.setSuccess(true);
-        cartDto.setId(cartEntity.getId());
-        CartItemDto cartItem = new CartItemDto();
-        List<DishItemDto> dishItems = cartEntity.getDishes().stream()
-                .collect(Collectors.groupingBy(DishEntity::getId, Collectors.summingInt(d -> 1)))
-                .entrySet().stream()
-                .map(entry -> new DishItemDto(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
-        cartItem.setDishItems(dishItems);
-        cartDto.setCart(cartItem);
-        return cartDto;
+        return cartEntity;
+    }
+
+
+    private CartEntity getCartEntity(UserEntity user) {
+        CartEntity cartEntity = cartRepository.findByUserId(user.getId())
+                .orElseGet(() -> {
+                    CartEntity newCart = new CartEntity();
+                    newCart.setUser(user);
+                    return newCart;
+                });
+        return cartEntity;
     }
 
     @Override
