@@ -3,6 +3,8 @@ package ru.fkjob.delivery.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
@@ -39,9 +41,11 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public List<DishDto> getDishByName(final String name) {
-        List<DishEntity> dishEntities = dishRepository.findDishEntitiesByNameStartWithName(name);
+        Pageable pageable = PageRequest.of(0, 10); // ограничила количество элементов
+        List<DishEntity> dishEntities = dishRepository.findDishEntitiesByNameStartWithName(name, pageable); //pageable редактировала
         if (dishEntities.isEmpty()) {
-            List<DishEntity> dish = dishRepository.findDishEntitiesByName(name);
+            Pageable pageable1 = PageRequest.of(0, 10); // ограничила количество элементов
+            List<DishEntity> dish = dishRepository.findDishEntitiesByName(name, pageable1);
             return dishMapper.toDto(dish);
         }
         return dishMapper.toDto(dishEntities);
@@ -50,7 +54,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishDto> getDishList() {
         List<DishEntity> entities = dishRepository.findAll();
-        return dishMapper.toDto(entities);  
+        return dishMapper.toDto(entities);
     }
 
     @Override

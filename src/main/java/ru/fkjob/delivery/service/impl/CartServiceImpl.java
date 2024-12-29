@@ -1,6 +1,7 @@
 package ru.fkjob.delivery.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,7 @@ import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j // правка
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final DishRepository dishRepository;
@@ -89,8 +91,11 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartDishInfoDto> getSummary() {
+        log.info("get User Id If Authentication()");
         Long userId = getUserIdIfAuthentication();
+        log.info("get Cart Entity(userId)");
         CartEntity cartEntity = getCartEntity(userId);
+        log.info("create Cart(cartEntity)");
         List<CartItemDishDto> items = createCart(cartEntity);
         CartDishInfoDto cartInfo = calculateCartInfo(items);
         return Collections.singletonList(cartInfo);
@@ -124,13 +129,20 @@ public class CartServiceImpl implements CartService {
                         .name(dishEntity.getName())
                         .price(dishEntity.getPrice())
                         .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId(), cartEntity.getId()))
+                       // .quantity(getCountDishes(dishEntity, cartEntity.getDishes()))
                         .imageDish(ImageDishDto.builder()
-                                .id(dishEntity.getImage()!= null? dishEntity.getImage().getId() : null)
-                                .url(dishEntity.getImage()!= null? dishEntity.getImage().getUrl() : null)
+                                .id(dishEntity.getImage() != null ? dishEntity.getImage().getId() : null)
+                                .url(dishEntity.getImage() != null ? dishEntity.getImage().getUrl() : null)
                                 .build())
                         .build())
                 .collect(Collectors.toList());
     }
+
+//    private int getCountDishes(DishEntity dishEntity, List<DishEntity> dishEntityList) {
+//        return (int) dishEntityList.stream()
+//                .filter(d -> d.getId().equals(dishEntity.getId()))
+//                .count();
+//    }
 
     private CartDishInfoDto calculateCartInfo(List<CartItemDishDto> items) {
         int quantity = 0;

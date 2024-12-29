@@ -50,7 +50,7 @@ public class MenuController {
         return dishService.save(dishInfoDto, categoryId);
     }
 
-    @GetMapping("/category/dish")
+    @GetMapping("/category/dish") // get dish
     @Operation(summary = "Получить информацию по блюду по названию")
     public List<DishDto> getDishByName(@RequestParam(name = "name") final String name) {
         return dishService.getDishByName(name);
@@ -75,13 +75,13 @@ public class MenuController {
         return categoryService.getAllCategory();
     }
 
-    @GetMapping("/category/{id}")
+    @GetMapping("/category/{id}") // info_category
     @Operation(summary = "Получить информацию по категории")
     public CategoryInfoDto getCategoryById(@PathVariable(name = "id") final Long id) {
         return categoryService.getCategoryById(id);
     }
 
-    @GetMapping("/categoryes-dish")
+    @GetMapping("/categoryes-dish") // categoryes-dish
     @Operation(summary = "Список всех категорий с блюдами")
     public List<CategoryInfoDto> getCategoryDishes() {
         return categoryService.getAllCategoryDishes();
