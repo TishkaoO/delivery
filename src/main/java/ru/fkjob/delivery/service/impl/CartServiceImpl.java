@@ -33,6 +33,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final DishRepository dishRepository;
     private final UserRepository userRepository;
+    private final CartDishRepository cartDishRepository;
 
     @Transactional
     @Override
@@ -146,4 +147,12 @@ public class CartServiceImpl implements CartService {
                 .totalQuantity(quantity)
                 .build();
     }
+
+    @Override
+    public void deleteDishFromCart(Long dishId, Long cartId) {
+        if (cartDishRepository.deleteCartDish(cartId, dishId) < 1) {
+            throw new NotFoundException(String.format("Не найдено блюдо с id = %s в корзине с id = %s", dishId, cartId));
+        }
+    }
+
 }
