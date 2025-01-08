@@ -17,6 +17,7 @@ import ru.fkjob.delivery.dto.dish.DishItemDto;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.exception.UnauthorizedUserException;
+import ru.fkjob.delivery.repository.CartDishRepository;
 import ru.fkjob.delivery.repository.CartRepository;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.repository.UserRepository;
@@ -125,8 +126,8 @@ public class CartServiceImpl implements CartService {
                         .price(dishEntity.getPrice())
                         .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId(), cartEntity.getId()))
                         .imageDish(ImageDishDto.builder()
-                                .id(dishEntity.getImage()!= null? dishEntity.getImage().getId() : null)
-                                .url(dishEntity.getImage()!= null? dishEntity.getImage().getUrl() : null)
+                                .id(dishEntity.getImage() != null ? dishEntity.getImage().getId() : null)
+                                .url(dishEntity.getImage() != null ? dishEntity.getImage().getUrl() : null)
                                 .build())
                         .build())
                 .collect(Collectors.toList());

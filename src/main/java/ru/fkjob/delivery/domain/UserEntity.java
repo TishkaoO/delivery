@@ -1,6 +1,8 @@
 package ru.fkjob.delivery.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.*;
@@ -30,7 +32,8 @@ public class UserEntity {
 
     private String roles;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
+    // @Fetch(value = FetchMode.JOIN) // добавили Join
     private List<CartEntity> carts;
 
     @Override

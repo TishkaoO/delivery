@@ -8,6 +8,8 @@ import ru.fkjob.delivery.domain.CartEntity;
 import java.util.Optional;
 
 public interface CartRepository extends JpaRepository<CartEntity, Long> {
+
+    @Query("SELECT c FROM CartEntity c LEFT JOIN FETCH c.dishes d LEFT JOIN FETCH d.image WHERE c.id = ?1")
     Optional<CartEntity> findByUserId(Long userId);
 
     @Query(value = "select count(dish_id) from delivery.cart_dish join " +
