@@ -1,6 +1,8 @@
 package ru.fkjob.delivery.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +25,8 @@ public class CategoryEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category")
+    @Fetch(FetchMode.JOIN) // исправить
     private List<DishEntity> dishes;
 
     @Override

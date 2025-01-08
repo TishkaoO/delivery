@@ -11,4 +11,6 @@ public interface CartService {
 
     CartDto createCart(List<DishItemDto> dish);
     List<CartDishInfoDto> getSummary();
+
+    void deleteDishFromCart(Long dishId, Long cartId);
 }

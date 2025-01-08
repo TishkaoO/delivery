@@ -1,11 +1,12 @@
 package ru.fkjob.delivery.mappers.dish;
 
+import org.mapstruct.Mapper;
+import ru.fkjob.delivery.domain.DishEntity;
 import ru.fkjob.delivery.dto.dish.DishDto;
 import ru.fkjob.delivery.dto.dish.DishInfoDto;
-import ru.fkjob.delivery.domain.DishEntity;
 
 import java.util.List;
-
+@Mapper(componentModel = "spring")
 public interface DishMapper {
     DishInfoDto toDtoInfo(DishEntity entity);
 
@@ -15,5 +16,5 @@ public interface DishMapper {
 
     DishEntity toEntity(DishInfoDto dto);
 
-    List<DishEntity> toEntity(List<DishDto> entity);
+    List<DishEntity> toEntity(List<DishDto> dtos);
 }

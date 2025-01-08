@@ -17,6 +17,7 @@ import ru.fkjob.delivery.dto.dish.DishItemDto;
 import ru.fkjob.delivery.dto.image.ImageDishDto;
 import ru.fkjob.delivery.exception.NotFoundException;
 import ru.fkjob.delivery.exception.UnauthorizedUserException;
+import ru.fkjob.delivery.repository.CartDishRepository;
 import ru.fkjob.delivery.repository.CartRepository;
 import ru.fkjob.delivery.repository.DishRepository;
 import ru.fkjob.delivery.repository.UserRepository;
@@ -32,6 +33,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final DishRepository dishRepository;
     private final UserRepository userRepository;
+    private final CartDishRepository cartDishRepository;
 
     @Transactional
     @Override
@@ -125,8 +127,8 @@ public class CartServiceImpl implements CartService {
                         .price(dishEntity.getPrice())
                         .quantity(cartRepository.findCountDishFromCartByDishId(dishEntity.getId(), cartEntity.getId()))
                         .imageDish(ImageDishDto.builder()
-                                .id(dishEntity.getImage()!= null? dishEntity.getImage().getId() : null)
-                                .url(dishEntity.getImage()!= null? dishEntity.getImage().getUrl() : null)
+                                .id(dishEntity.getImage() != null ? dishEntity.getImage().getId() : null)
+                                .url(dishEntity.getImage() != null ? dishEntity.getImage().getUrl() : null)
                                 .build())
                         .build())
                 .collect(Collectors.toList());
@@ -145,4 +147,12 @@ public class CartServiceImpl implements CartService {
                 .totalQuantity(quantity)
                 .build();
     }
+
+    @Override
+    public void deleteDishFromCart(Long dishId, Long cartId) {
+        if (cartDishRepository.deleteCartDish(cartId, dishId) < 1) {
+            throw new NotFoundException(String.format("Не найдено блюдо с id = %s в корзине с id = %s", dishId, cartId));
+        }
+    }
+
 }

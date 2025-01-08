@@ -50,7 +50,7 @@ public class MenuController {
         return dishService.save(dishInfoDto, categoryId);
     }
 
-    @GetMapping("/category/dish")
+    @GetMapping("/category/dish") // get dish
     @Operation(summary = "Получить информацию по блюду по названию")
     public List<DishDto> getDishByName(@RequestParam(name = "name") final String name) {
         return dishService.getDishByName(name);
