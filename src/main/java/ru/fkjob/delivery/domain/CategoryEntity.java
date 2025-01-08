@@ -25,8 +25,8 @@ public class CategoryEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN) // добавили Join
+    @OneToMany(mappedBy = "category")
+    @Fetch(FetchMode.JOIN) // исправить
     private List<DishEntity> dishes;
 
     @Override

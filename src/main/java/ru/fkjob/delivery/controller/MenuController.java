@@ -75,13 +75,13 @@ public class MenuController {
         return categoryService.getAllCategory();
     }
 
-    @GetMapping("/category/{id}") // info_category
+    @GetMapping("/category/{id}")
     @Operation(summary = "Получить информацию по категории")
     public CategoryInfoDto getCategoryById(@PathVariable(name = "id") final Long id) {
         return categoryService.getCategoryById(id);
     }
 
-    @GetMapping("/categoryes-dish") // categoryes-dish
+    @GetMapping("/categoryes-dish")
     @Operation(summary = "Список всех категорий с блюдами")
     public List<CategoryInfoDto> getCategoryDishes() {
         return categoryService.getAllCategoryDishes();

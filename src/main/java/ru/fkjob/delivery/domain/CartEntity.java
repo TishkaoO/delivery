@@ -25,7 +25,7 @@ public class CartEntity {
     private UserEntity user;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER) // правка с lazy
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             schema = "delivery",
             name = "cart_dish",
